@@ -1,0 +1,31 @@
+=clearfix
+  &:after
+    content: ''
+    clear: both
+    display: block
+    
+=size($w, $h: auto)
+	width: $w
+	height: $h
+
+=flexCenter
+	display: flex
+	justify-content: center
+	align-items: center
+
+=radius($radius: 100%)
+	border-radius: $radius
+
+=valign
+	position: absolute
+	top: 50%
+	transform: translateY(-50%)
+=halign
+	position: absolute
+	left: 50%
+	transform: translateX(-50%)
+=centeralign
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)

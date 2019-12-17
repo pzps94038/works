@@ -1,0 +1,52 @@
+extends ./pages/_layout.pug
+block append title
+  title BMI Calculator
+block append js
+  script(src="webroot/scripts/main.js", defer)
+block append css
+  link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
+block append content
+  //- include ./pages/_index.pug
+  .container
+    .header
+      .wrapper
+        .logo
+          img(src="/webroot/images/BMICLogo.svg", alt="")
+        .inputBox
+          span  身高 cm
+          input(type="text", placeholder="請輸入身高")
+          span  體重 kg
+          input(type="text", placeholder="請輸入體重")
+        .btnBox
+          button#btn-calculator 看結果
+          #result
+            .rst-num 20.90
+            .rst-msg 理想
+            button#btn-result
+              i.material-icons autorenew
+          
+    .record
+      .wrapper
+        h2 BMI 紀錄
+        ul.listBox
+          li
+            p.list-tag
+              span 理想
+            .list-bmi 20.90
+            .list-weight 70kg
+            .list-height 180cm
+            .list-date 06-19-2017
+          li
+            p.list-tag
+              span 重度肥胖
+            .list-bmi 20.90
+            .list-weight 70kg
+            .list-height 180cm
+            .list-date 06-19-2017
+
+
+
+
+
+    .footer
+      img(src="/webroot/images/BMICLogo_d.svg", alt="")

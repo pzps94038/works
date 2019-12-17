@@ -1,0 +1,279 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url(main/base.css);
+body {
+  background: #eeeeee;
+  color: #444444;
+  min-width: 640px;
+}
+
+body .wrapper {
+  width: calc(1024px - 170px*2);
+  margin: 0 auto;
+  padding: 0 170px;
+}
+
+.footer {
+  height: 90px;
+  background: #FFD366;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.footer img {
+  width: 55px;
+}
+
+.header {
+  background: #444444;
+}
+
+.header .wrapper {
+  height: 300px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 170px;
+}
+
+.header .logo {
+  width: 117px;
+}
+
+.header .inputBox span {
+  display: block;
+  color: #FFD366;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.header .inputBox input {
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid #FFD366;
+  padding: 8px 10px 7px;
+  font-size: 20px;
+  color: #FFFFFF;
+  border-radius: 10px;
+}
+
+.header .inputBox input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.header .inputBox input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.header .inputBox input + span {
+  margin-top: 23px;
+}
+
+#btn-calculator {
+  width: 120px;
+  height: 120px;
+  background: #FFD366;
+  font-size: 24px;
+  border: 0;
+  color: #444444;
+  border-radius: 100%;
+  transition: all 0.15s linear;
+}
+
+#btn-calculator:hover {
+  cursor: pointer;
+  -ms-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+  -o-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+  box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+}
+
+#btn-calculator:active {
+  background: #DEA821;
+  -ms-box-shadow: 0 0 0 transparent;
+  -o-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent;
+}
+
+#result {
+  display: none;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: #FFD366;
+  font-size: 24px;
+  border: 0;
+  color: #FFD366;
+  border-radius: 100%;
+  transition: all 0.15s linear;
+}
+
+#result:after {
+  content: '';
+  z-index: 1;
+  width: 108px;
+  height: 108px;
+  background: #444444;
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+
+#result div {
+  z-index: 2;
+}
+
+#result .rst-num {
+  font-size: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+
+#result .rst-num:after {
+  content: 'BMI';
+  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  top: 100%;
+  margin-top: -5px;
+}
+
+#result .rst-msg {
+  white-space: nowrap;
+  font-size: 30px;
+  left: 100%;
+  margin-left: 15px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+}
+
+#btn-result {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  color: #444444;
+  background: #FFD366;
+  border: 3px solid #444444;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: all 0.3s linear;
+}
+
+#btn-result i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+}
+
+#btn-result:hover {
+  -khtml-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.record {
+  padding: 48px 0;
+}
+
+.record .wrapper {
+  min-height: calc(100vh - 390px - 48px*2);
+}
+
+.record h2 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.listBox {
+  margin-top: 36px;
+}
+
+.listBox li {
+  background: #FFFFFF;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.listBox li + li {
+  margin-top: 16px;
+}
+
+.listBox li .list-tag {
+  position: relative;
+  min-width: 104px;
+  padding: 20px 20px;
+  background: #FFD366;
+}
+
+.listBox li .list-tag span {
+  position: relative;
+  z-index: 2;
+}
+
+.listBox li .list-tag:after {
+  content: '';
+  width: 97px;
+  height: 100%;
+  background: #FFFFFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.listBox li div {
+  padding: 0 16px;
+  font-size: 16px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.listBox li div:before {
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 7px;
+}
+
+.listBox li .list-bmi:before {
+  content: 'BMI';
+}
+
+.listBox li .list-height:before {
+  content: 'height';
+}
+
+.listBox li .list-weight:before {
+  content: 'weight';
+}
+
+.listBox li .list-date {
+  font-size: 12px;
+}
