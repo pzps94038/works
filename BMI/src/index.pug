@@ -2,16 +2,16 @@ extends ./pages/_layout.pug
 block append title
   title BMI Calculator
 block append js
-  script(src="webroot/scripts/main.js", defer)
+  script(src="../../webroot/scripts/main.js", defer)
 block append css
-  link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
+  link(type="text/css", rel="stylesheet", href="../../webroot/css/style.css")
 block append content
   //- include ./pages/_index.pug
   .container
     .header
       .wrapper
         .logo
-          img(src="/webroot/images/BMICLogo.svg", alt="")
+          img(src="../../webroot/images/BMICLogo.svg", alt="")
         .inputBox
           span  身高 cm
           input(type="text", placeholder="請輸入身高")
@@ -49,4 +49,4 @@ block append content
 
 
     .footer
-      img(src="/webroot/images/BMICLogo_d.svg", alt="")
+      img(src="../../webroot/images/BMICLogo_d.svg", alt="")
