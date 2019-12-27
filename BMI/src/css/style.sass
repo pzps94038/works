@@ -52,10 +52,15 @@ body
       font-size: 20px
       color: $w
       +radius(10px)
+      +transition(all, .1s)
       &::placeholder
-        color: rgba($w, .5)
+        color: rgba($w, .7)
       & + span
         margin-top: 23px
+      &.focus
+        background: rgba(#ff607d ,.15)
+        border: 2px solid #ff607d
+        +box-shadow(0, 0, 10px, rgba(#ff607d ,.5))
 
 #btn-calculator
   width: 120px
@@ -96,7 +101,10 @@ body
     z-index: 2
   .rst-num
     font-size: 32px
-    +centeralign
+    position: absolute
+    top: 47%
+    left: 50%
+    transform: translate(-50%, -50%)
     &:after
       content: 'BMI'
       font-size: 14px
@@ -122,13 +130,12 @@ body
   border: 3px solid $b
   cursor: pointer
   +radius(100%)
-  +transition(all, .3s)
+  +transition(all, .2s)
   i
     +centeralign
   &:hover
-    +rotate(180)
+    +rotate(90)
     
-  
 .record
   padding: 48px 0
   .wrapper
@@ -140,29 +147,39 @@ body
   margin-top: 36px
   li
     background: $w
-    
     display: flex
     justify-content: space-between
     align-items: center
+    overflow: hidden
     & + li
       margin-top: 16px
-    .list-tag
+    .list-msg
       position: relative
-      min-width: 104px
-      padding: 20px 20px
-      background: $mainColor
+      min-width: 65px
+      padding: 20px 10px 20px 30px
       span
-        position: relative
-        z-index: 2
-      &:after
-        content: ''
-        width: 97px
-        height: 100%
-        background: $w
+        display: block
+      .tag
         position: absolute
-        right: 0
+        left: 0
         top: 0
-        z-index: 1
+        width: 7px
+        height: 100%
+        &.green
+          background: #86D73F
+          +box-shadow(1px, 0, 5px, rgba(#86D73F, .5))
+        &.blue
+          background: #31BAF9
+          +box-shadow(1px, 0, 5px, rgba(#31BAF9, .5))
+        &.orange1
+          background: #FF982D
+          +box-shadow(1px, 0, 5px, rgba(#FF982D, .5))
+        &.orange2
+          background: #FF6C03
+          +box-shadow(1px, 0, 5px, rgba(#FF6C03, .5))
+        &.red
+          background: #FF1200
+          +box-shadow(1px, 0, 5px, rgba(#FF1200, .5))
     div
       padding: 0 16px
       font-size: 16px

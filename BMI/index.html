@@ -19,14 +19,14 @@
             <div class="wrapper">
                 <div class="logo"><img src="webroot/images/BMICLogo.svg" alt=""></div>
                 <div class="inputBox"><span> 身高 cm</span>
-                    <input type="text" placeholder="請輸入身高"><span> 體重 kg</span>
-                    <input type="text" placeholder="請輸入體重">
+                    <input id="v_height" type="text" placeholder="請輸入身高"><span> 體重 kg</span>
+                    <input id="v_weight" type="text" placeholder="請輸入體重">
                 </div>
                 <div class="btnBox">
                     <button id="btn-calculator">看結果</button>
                     <div id="result">
-                        <div class="rst-num">20.90</div>
-                        <div class="rst-msg">理想</div>
+                        <div class="rst-num"></div>
+                        <div class="rst-msg"></div>
                         <button id="btn-result"><i class="material-icons">autorenew</i></button>
                     </div>
                 </div>
@@ -37,14 +37,14 @@
                 <h2>BMI 紀錄</h2>
                 <ul class="listBox">
                     <li>
-                        <p class="list-tag"><span>理想</span></p>
+                        <div class="list-msg"><span class="tag green"></span><span class="txt">理想</span></div>
                         <div class="list-bmi">20.90</div>
                         <div class="list-weight">70kg</div>
                         <div class="list-height">180cm</div>
                         <div class="list-date">06-19-2017</div>
                     </li>
                     <li>
-                        <p class="list-tag"><span>重度肥胖</span></p>
+                        <div class="list-msg"><span class="tag blue"></span><span class="txt">重度肥胖</span></div>
                         <div class="list-bmi">20.90</div>
                         <div class="list-weight">70kg</div>
                         <div class="list-height">180cm</div>
@@ -53,7 +53,7 @@
                 </ul>
             </div>
         </div>
-        <div class="footer"><img src="webroot/images/BMICLogo.svg" alt=""></div>
+        <div class="footer"><img src="webroot/images/BMICLogo_d.svg" alt=""></div>
     </div>
 </body>
 

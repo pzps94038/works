@@ -61,18 +61,27 @@ body .wrapper {
   font-size: 20px;
   color: #FFFFFF;
   border-radius: 10px;
+  transition: all 0.1s linear;
 }
 
 .header .inputBox input:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .header .inputBox input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .header .inputBox input + span {
   margin-top: 23px;
+}
+
+.header .inputBox input.focus {
+  background: rgba(255, 96, 125, 0.15);
+  border: 2px solid #ff607d;
+  -ms-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
+  -o-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
+  box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
 }
 
 #btn-calculator {
@@ -134,7 +143,7 @@ body .wrapper {
 #result .rst-num {
   font-size: 32px;
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
@@ -175,7 +184,7 @@ body .wrapper {
   border: 3px solid #444444;
   cursor: pointer;
   border-radius: 100%;
-  transition: all 0.3s linear;
+  transition: all 0.2s linear;
 }
 
 #btn-result i {
@@ -187,9 +196,9 @@ body .wrapper {
 }
 
 #btn-result:hover {
-  -khtml-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
+  -khtml-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .record {
@@ -217,33 +226,64 @@ body .wrapper {
       justify-content: space-between;
   -ms-flex-align: center;
       align-items: center;
+  overflow: hidden;
 }
 
 .listBox li + li {
   margin-top: 16px;
 }
 
-.listBox li .list-tag {
+.listBox li .list-msg {
   position: relative;
-  min-width: 104px;
-  padding: 20px 20px;
-  background: #FFD366;
+  min-width: 65px;
+  padding: 20px 10px 20px 30px;
 }
 
-.listBox li .list-tag span {
-  position: relative;
-  z-index: 2;
+.listBox li .list-msg span {
+  display: block;
 }
 
-.listBox li .list-tag:after {
-  content: '';
-  width: 97px;
-  height: 100%;
-  background: #FFFFFF;
+.listBox li .list-msg .tag {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
-  z-index: 1;
+  width: 7px;
+  height: 100%;
+}
+
+.listBox li .list-msg .tag.green {
+  background: #86D73F;
+  -ms-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+  -o-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+  box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+}
+
+.listBox li .list-msg .tag.blue {
+  background: #31BAF9;
+  -ms-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+  -o-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+  box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+}
+
+.listBox li .list-msg .tag.orange1 {
+  background: #FF982D;
+  -ms-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+  -o-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+  box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+}
+
+.listBox li .list-msg .tag.orange2 {
+  background: #FF6C03;
+  -ms-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+  -o-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+  box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+}
+
+.listBox li .list-msg .tag.red {
+  background: #FF1200;
+  -ms-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
+  -o-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
+  box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
 }
 
 .listBox li div {

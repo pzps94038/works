@@ -1,140 +1,106 @@
-// // 存入LocalStorage
-// // 顯示結果，呼叫LS
+function getElement(elem) {
+    return document.querySelector(elem);
+}
+const colors = ['#86D73F', '#31BAF9', '#FF982D', '#FF6C03', '#FF1200'];
+const height = getElement('#v_height');
+const weight = getElement('#v_weight');
+const result = getElement('#result');
+const btn = getElement('#btn-calculator');
 
-// function getElement(elem) {
-//     return document.querySelector(elem);
-// }
+const bmi = getElement('.rst-num');
+const msg = getElement('.rst-msg');
+const renew = getElement('#btn-result');
+const inputs = document.querySelectorAll('.inputBox input');
 
-// // 計算結果
-// function calculate() {
-//     const radio = document.querySelectorAll('.gender');
-//     const age = getElement('#age').value;
-//     const height = getElement('#height').value;
-//     const weight = getElement('#weight').value;
-//     const _bmr = getElement('#bmr');
-//     const _bmi = getElement('#bmi');
-//     const _ideal = getElement('#ideal');
-//     const _result = getElement('#result');
-//     let bmi,bmr,ideal;
-//     let str = '';
-//     let msg = '';
+function calculate() {
+    let $bmi = Math.round((weight.value/Math.pow(height.value/100,2))*100)/100;
+    bmi.textContent = $bmi;
+    result.style.display = 'block';
+    btn.style.display = 'none';
 
-//     const colors = ['#31BAF9', '#86D73F', '#FF982D', '#FF6C03', '#FF1200'];
-//     const text = ['體重過輕', '理想體重', '體重過重', '輕度肥胖', '中度肥胖', '重度肥胖'];
-    
-//     // 判斷性別 - 計算BMR 理想體重
-//     function bmrCount (){
-//         for(let i=0; i<radio.length; i++) {
-//             let radioChecked = radio[i];
-//             if ( radioChecked.checked == true) {
-//                 switch(radioChecked.value) {
-//                     case 'male':
-//                         bmr = Math.floor(66+weight*13.7+height*5-age*6.8);
-//                         ideal = Math.round((height-80)*70/100);
-//                         break;
-//                     case 'female':
-//                         bmr = Math.floor(655+weight*9.6+height*1.8-age*4.7);
-//                         ideal = Math.round((height-70)*60/100);
-//                         break;
-//                 }
-//             }
-//         }
-//     }
-        
-//     // 計算BMI - 判斷BMI範圍
-//     function bmiCount() {
-//         bmi = Math.round((weight/Math.pow(height/100,2))*100)/100;
-//         const idealweight = ideal + 'kg';
-//         if(bmi < 18.5) {
-//             str += '體重過輕，理想體重：' + idealweight;
-//             msg += text[0];
-//             _result.style.color = colors[0];
+    if ( $bmi <= 18.5 ) {
+        changeColor(colors[1]);
+        msg.textContent += '過輕';
+    } else if ( 18.5 < $bmi && $bmi <= 25 ) {
+        changeColor(colors[0]);
+        msg.textContent += '理想';
+    } else if ( 25 < $bmi && $bmi <= 30 ) {
+        changeColor(colors[2]);
+        msg.textContent += '過重';
+    } else if ( 30 < $bmi && $bmi <= 35 ) {
+        changeColor(colors[3]);
+        msg.textContent += '輕度肥胖';
+    } else if ( 35 < $bmi && $bmi <= 40 ) {
+        changeColor(colors[3]);
+        msg.textContent += '中度肥胖';
+    } else if ( 40 < $bmi ) {
+        changeColor(colors[4]);
+        msg.textContent += '重度肥胖';
+    }
+}
 
-//         } else if ( bmi >= 18.5 && bmi < 24 ) {
-//             str += '理想體重，繼續維持!';
-//             msg += text[1];
-//             _result.style.color = colors[1];
+function changeColor(color) {
+    result.style.background = color;
+    result.style.color = color;
+    renew.style.background = color;
+}
 
-//         } else if ( bmi >= 24 && bmi < 27 ) {
-//             str += '體重過重，理想體重：' + idealweight;
-//             msg += text[2];
-//             _result.style.color = colors[2];
+function blurCheck($input) {
+    const txt = [' 身高', ' 體重'];
+    let msg = '';
+    let chk = true;
+    for (let i=0; i<$input.length; i++) {
+        if ($input[i].value == '' || isNaN($input[i].value)) {
+            $input[i].classList.add('focus');
+            msg += txt[i];
+            chk = false;
+        } else {
+            $input[i].classList.remove('focus');
+            chk = true;
+        }
+    }
+    return {msg: msg, chk: chk}
+}
 
-//         } else if ( bmi >= 27 && bmi < 30 ) {
-//             str += '輕度肥胖，理想體重：' + idealweight;
-//             msg += text[3];
-//             _result.style.color = colors[3];
-
-//         } else if ( bmi >= 30 && bmi < 35 ) {
-//             str += '中度肥胖，理想體重：' + idealweight;
-//             msg += text[4];
-//             _result.style.color = colors[3];
-            
-//         } else if ( bmi >= 35 ) {
-//             str += '重度肥胖，理想體重：' + idealweight;
-//             msg += text[5];
-//             _result.style.color = colors[4];
-//         }
-//     }
-
-//     // 檢查內容
-//     let chk = true;
-//     function checkContent(e) {
-//         const inputs = document.querySelectorAll('input[type="text"]');
-//         if (radio.checked == false) {
-//             chk = false;    
-//         }
-//         inputs.forEach(function($input){
-//             if($input.value == '' || isNaN($input.value)) {
-//                 chk = false;
-//             }
-//         })
-//     }
+function checkFun() {
+    let alert_msg = blurCheck(inputs).msg;
+    let alert_chk = blurCheck(inputs).chk;
+    if ( alert_chk !== true ) {
+        alert('請輸入您的' + alert_msg);
+    } else {
+        calculate();
+        update();
+    }
+    renew.addEventListener('click', function() {
+        height.value = '';
+        weight.value = '';
+        msg.textContent = '';
+        result.style.display = 'none';
+        btn.style.display = 'block';
+    });
+}
 
 
-//     // 顯示結果
-//     function showResult() {
-//         const _popup = getElement('#popup');
-//         const _overlay = getElement('#overlay');
-//         const close = getElement('#close');
-//         const checkmark = document.querySelectorAll('.checkmark');
+btn.addEventListener('click', checkFun);
 
-//         if (chk === true) {
-//             // 顯示彈出視窗
-//             _popup.style.display = 'block';
-//             _overlay.style.display = 'block'; 
+const record = getElement('.listBox');
+const save = JSON.parse(localStorage.getItem('saves')) || [];
 
-//             _bmr.innerHTML = bmr;
-//             _bmi.innerHTML = bmi;
-//             _ideal.innerHTML = str;
-//             _result.innerHTML = msg;
-//         } else {
-//             // alert('有資料不正確喔！\n再檢查一下吧～');
-//             // return false;
-//         }
+function update($recordItem) {
+    let cont = '';
+    for (let i=0; i<cont.length; i++) {
+        cont += `
+        <li>
+            <div class="list-msg">
+                <span class="tag ${$recordItem[i].color}"></span>
+                <span class="txt">${$recordItem[i].txt}</span>
+            </div>
+            <div class="list-bmi">${$recordItem[i].bmi}</div>
+            <div class="list-weight">${$recordItem[i].weight}kg</div>
+            <div class="list-height">${$recordItem[i].height}cm</div>
+            <div class="list-date">${$recordItem[i].time}</div>
+        </li>`
+    }
+}
 
-//         // 彈出視窗關閉按鈕
-//         close.addEventListener('click',function(){
-//             _popup.style.display = 'none';
-//             _overlay.style.display = 'none';
-//         })
-//     }
-    
-//     bmrCount();
-//     bmiCount();
-//     checkContent();
-//     showResult();
-
-// }
-// getElement('.count').addEventListener('click', calculate);
-
-// const inputBox = document.querySelectorAll('input[type="text"]');
-// inputBox.forEach(function($input){
-//     $input.addEventListener('blur', function(){
-//         if($input.value == '' || isNaN($input.value)) {
-//             $input.classList.add('alert');
-//         } else {
-//             $input.classList.remove('alert');
-//         }
-//     })
-// })
+update();
