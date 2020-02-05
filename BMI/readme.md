@@ -11,7 +11,7 @@
 * 重新輸入數值
 * 變更結果顏色
 * 印出紀錄日期、抓取時間
-* 儲存 LS 紀錄 BMI 等數值
+* 儲存 LocalStorage 紀錄 BMI 等數值
 
 擴充功能：
 * 檢查 input 值是否正確
@@ -35,6 +35,7 @@ BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="95" style="ve
 5. 再把小數點往前挪2位，最後公式就是：
 ```Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100```
 
+---
 
 ### 變更顏色
 <img src="webroot/images/bmi_03.png" width="300">
@@ -48,11 +49,14 @@ function changeColor($color) {
     return $color; // 回傳顏色
 }
 ```
+
 最後在判斷 BMI 範圍時，再將事先設定好的顏色陣列帶進函式
 ```
 const colors = ['#86D73F', '#31BAF9', '#FF982D', '#FF6C03', '#FF1200'];
 changeColor(colors[2]);
 ```
+
+---
 
 ### 抓取時間
 `getMonth()` 取得月份從 0 開始算起，所以需要+1
@@ -69,11 +73,15 @@ function nowDate($date) {
     return {_date: $date, _time: tt};
 }
 ```
+
+---
+
 ### 數字補零 - 三元運算子
 `a ? b : c` 運算子可當做 `if...else` 陳述式的簡短表示法
 ```
 (today.getDate() < 10 ? '0' : '')+today.getDate()
 ```
+
 同樣的程式碼但使用 `if...else` 陳述式：
 ```
 if ( today.getDate < 10 ) { 
@@ -82,6 +90,7 @@ if ( today.getDate < 10 ) {
     '' + today.getDate()
 }
 ```
+
 [參考資料](http://zhi-yuan-chenge.blogspot.com/2015/10/jsjavascript_16.html)
 
 
