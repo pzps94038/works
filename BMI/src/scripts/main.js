@@ -1,20 +1,21 @@
 function getElement(elem) {
     return document.querySelector(elem);
 }
-const colors = ['#86D73F', '#31BAF9', '#FF982D', '#FF6C03', '#FF1200'];
-const height = getElement('#v_height');
-const weight = getElement('#v_weight');
-const result = getElement('#result');
-const btn = getElement('#btn-calculator');
+const colors = ['#86D73F', '#31BAF9', '#FF982D', '#FF6C03', '#FF1200']; // 顏色設定
+const height = getElement('#v_height'); // 身高
+const weight = getElement('#v_weight'); // 體重
+const result = getElement('#result'); // 顯示結果
+const btn = getElement('#btn-calculator'); // 計算按鈕
 
 const bmi = getElement('.rst-num');
 const msg = getElement('.rst-msg');
-const renew = getElement('#btn-result');
-const inputs = document.querySelectorAll('.inputBox input');
+const renew = getElement('#btn-result'); // 重新輸入按鈕
+const recordBox = getElement('.listBox'); // 顯示列表
 
+// ----- 儲存 LocalStorage ----- //
 const save = JSON.parse(localStorage.getItem('record')) || [];
 
-const recordBox = getElement('.listBox');
+// ----- 產生列表 ----- //
 function update(recordItem) {
     let cont = '';
     for (let i=0; i<recordItem.length; i++) {
@@ -31,10 +32,16 @@ function update(recordItem) {
             <i class="material-icons delete"  data-clear="${i}">delete</i>
         </li>`
     }
-    recordBox.innerHTML = cont;
+
+    // 判斷沒有資料時，顯示文字
+    if (save.length >= 1) {
+        recordBox.innerHTML = cont;
+    } else {
+        recordBox.innerHTML = '還沒有BMI紀錄，快來面對現實吧！';
+    }
 }
 
-
+// ----- 計算 BMI ----- //
 function calculate() {
     let $bmi = Math.round((weight.value/Math.pow(height.value/100,2))*100)/100;
     bmi.textContent = $bmi;
@@ -42,6 +49,7 @@ function calculate() {
     btn.style.display = 'none';
     let tag = '';
 
+    // 判斷 BMI 範圍
     if ( $bmi <= 18.5 ) {
         changeColor(colors[1]);
         tag = 'blue';
@@ -67,22 +75,31 @@ function calculate() {
         tag = 'red';
         msg.textContent += '重度肥胖';
     }
-
+    
+    // LS 陣列
     let array = {
         color: tag,
         txt: msg.textContent,
         bmi: $bmi,
         weight: weight.value,
         height: height.value,
-        date:  nowDate().dates
+        date:  nowDate()._date,
+        time: nowDate()._time
     };
-    
+
+    // 新增資料按照建立時間排序
+    save.sort(function(a, b){
+        return new Date(b.time) - new Date(a.time); 
+    })
+
+    // 儲存 LS
     save.push(array);
     let toString = JSON.stringify(save);
     localStorage.setItem('record', toString);
     update(save);
 }
 
+// ----- 變更顏色 ----- //
 function changeColor($color) {
     result.style.background = $color;
     result.style.color = $color;
@@ -90,15 +107,18 @@ function changeColor($color) {
     return $color;
 }
 
+// ----- 抓取時間 ----- //
 function nowDate($date) {
     let today = new Date();
     let YY = today.getFullYear();
     let MM = (today.getMonth() + 1 < 10 ? '0' : '')+(today.getMonth() + 1);
     let dd = (today.getDate() < 10 ? '0' : '')+today.getDate();
     $date = MM + '-' + dd + '-' + YY ;
-    return {dates: $date, times: today};
+    return {_date: $date, _time: today};
 }
 
+// ----- 檢查 input 內容是否正確 ----- //
+const inputs = document.querySelectorAll('.inputBox input');
 function blurCheck($input) {
     const txt = [' 身高', ' 體重'];
     let msg = '';
@@ -112,12 +132,12 @@ function blurCheck($input) {
             $input[i].classList.remove('focus');
         }
     }
-    return {msg: msg, chk: chk}
+    return {_msg: msg, _chk: chk}
 }
 
 function checkFun() {
-    let alert_msg = blurCheck(inputs).msg;
-    let alert_chk = blurCheck(inputs).chk;
+    let alert_msg = blurCheck(inputs)._msg;
+    let alert_chk = blurCheck(inputs)._chk;
     if ( alert_chk === true ) {
         calculate();
     } else {
@@ -128,19 +148,21 @@ function checkFun() {
                 blurCheck(inputs);
             });
         })
-
         return false;
     }
-    renew.addEventListener('click', function() {
-        height.value = '';
-        weight.value = '';
-        msg.textContent = '';
-        result.style.display = 'none';
-        btn.style.display = 'block';
-    });
-    
+    renew.addEventListener('click', renewFun);
 }
 
+// ----- 重新輸入 ----- //
+function renewFun () {
+    height.value = '';
+    weight.value = '';
+    msg.textContent = '';
+    result.style.display = 'none';
+    btn.style.display = 'block';
+}
+
+// ----- 清除單筆資料 ----- //
 function clearData (e) {
     let $clear = e.target.dataset.clear;
     if ( !$clear ){ return }
@@ -150,7 +172,14 @@ function clearData (e) {
     update(save);
 }
 
+// ----- 鍵盤控制 ----- //
+document.body.addEventListener('keydown', function(e){
+    if(e.keyCode == 13) { 
+        checkFun();
+    } else { return };
+})
 
+// ----- 更新與監聽 ----- //
 btn.addEventListener('click', checkFun);
 recordBox.addEventListener('click', clearData);
 update(save);

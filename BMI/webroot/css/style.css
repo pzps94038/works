@@ -8,7 +8,7 @@ body {
 }
 
 body .wrapper {
-  width: calc(1024px - 170px*2);
+  max-width: calc(1024px - 170px*2);
   margin: 0 auto;
   padding: 0 170px;
 }
@@ -216,6 +216,7 @@ body .wrapper {
 
 .listBox {
   margin-top: 36px;
+  text-align: center;
 }
 
 .listBox li {
