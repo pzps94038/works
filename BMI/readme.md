@@ -21,7 +21,7 @@
 ---
 
 ### 計算 BMI
-BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="95" style="vertical-align: middle;">
+BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="90">
 <br>w = 體重，單位：公斤
 <br>h = 身高，單位：公尺
 <br>BMI = 身高體重指數，單位：公斤/平方公尺
@@ -31,8 +31,9 @@ BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="95" style="ve
 1. `Math.round()` 四捨五入到最接近的整數值
 2. `Math.pow(x, y)` 也就是 `Math.pow( 數字 , 次方 )`
 3. 因為我們習慣用公分當作身高單位，所以用100公分換算 `Math.pow(身高/100, 2)`
-4. 後面因為需要取到小數點後2位，所以先把 `體重/(Math.pow(身高/100, 2))` 乘以100，
+4. 後面因為需要取到小數點後2位，所以先把 `體重/(Math.pow(身高/100, 2))` 乘以100
 5. 再把小數點往前挪2位，最後公式就是：
+
 ```Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100```
 
 ---
@@ -61,8 +62,8 @@ changeColor(colors[2]);
 
 ### 抓取時間
 `getMonth()` 取得月份從 0 開始算起，所以需要+1
-<br>另外因為排序需要，多設定一個 `today.getTime()`
-<br>最後會取出一段數字 ex.1580911069807 (由 1970年1月1日零時零分計起到目前時間) 單位:(毫秒)
+<br>另外因為排序需要，多設定一個 `today.getTime()` 會取出一段數字
+<br>ex.1580911069807 // 由1970年1月1日零時零分計起到目前時間(毫秒)
 ```
 function nowDate($date) {
     let today = new Date();
