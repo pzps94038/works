@@ -150,13 +150,14 @@ body
     display: flex
     justify-content: space-between
     align-items: center
-    overflow: hidden
+    position: relative
     & + li
       margin-top: 16px
     .list-msg
       position: relative
       min-width: 65px
       padding: 20px 10px 20px 30px
+      overflow: hidden
       span
         display: block
       .tag
@@ -181,7 +182,7 @@ body
           background: #FF1200
           +box-shadow(1px, 0, 5px, rgba(#FF1200, .5))
     div
-      padding: 0 16px
+      padding: 0 20px
       font-size: 16px
       position: relative
       display: flex
@@ -198,6 +199,19 @@ body
       content: 'weight'
     .list-date
       font-size: 12px
+      padding: 0
+    .delete
+      width: 50px
+      height: 50px
+      padding: 0
+      display: flex
+      justify-content: center
+      align-items: center
+      cursor: pointer
+      opacity: .2
+      +transition(all, .15s)
+      &:hover
+        opacity: 1
 
 
 
