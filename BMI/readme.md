@@ -2,6 +2,7 @@
 <img src="webroot/images/bmi_01.png" width="700">
 
 標示文件：[https://hexschool.github.io/JavaScript_HomeWork/](https://hexschool.github.io/JavaScript_HomeWork/)
+<br>
 成品Demo：[https://erica1123.github.io/works/BMI/](https://erica1123.github.io/works/BMI/)
 
 基本功能需求：
@@ -20,25 +21,25 @@
 ---
 
 ### 計算 BMI
-BMI 的計算公式為 <img src="webroot/images/bmi_02.svg">
-w = 體重，單位：公斤
-h = 身高，單位：公尺
-BMI = 身高體重指數，單位：公斤/平方公尺
+BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="95" style="vertical-align: middle;">
+<br>w = 體重，單位：公斤
+<br>h = 身高，單位：公尺
+<br>BMI = 身高體重指數，單位：公斤/平方公尺
 
 這裡用到 JavaScripts 裡的數學運算 `Math.round()`、`Math.pow(x, y)`
-```
-1. Math.round() 四捨五入到最接近的整數值
-2. Math.pow(x, y) 也就是 Math.pow( 數字 , 次方 )
-3. 因為我們習慣用公分當作身高單位，所以用100公分換算 Math.pow(身高/100, 2)
-4. 後面因為需要取到小數點後2位，所以先把 體重/(Math.pow(身高/100, 2)) 乘以100，
-5. 再把小數點往前挪2位，最後公式就是 
-Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100
-```
+
+1. `Math.round()` 四捨五入到最接近的整數值
+2. `Math.pow(x, y)` 也就是 `Math.pow( 數字 , 次方 )`
+3. 因為我們習慣用公分當作身高單位，所以用100公分換算 `Math.pow(身高/100, 2)`
+4. 後面因為需要取到小數點後2位，所以先把 `體重/(Math.pow(身高/100, 2))` 乘以100，
+5. 再把小數點往前挪2位，最後公式就是：
+```Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100```
+
 
 ### 變更顏色
-<img src="webroot/images/bmi_03.png">
+<img src="webroot/images/bmi_03.png" width="300">
 依照標示文件需求，不同 BMI 數值會在結果圓圈搭配不同顏色
-所以在設計 CSS 時，先把需要變更的部分獨立出來，方便 Javascripts 切換使用
+<br>所以在設計 CSS 時，先把需要變更的部分獨立出來，方便 Javascripts 切換使用
 ```
 function changeColor($color) {
     result.style.background = $color; // 外圈背景色
@@ -55,8 +56,8 @@ changeColor(colors[2]);
 
 ### 抓取時間
 `getMonth()` 取得月份從 0 開始算起，所以需要+1
-另外因為排序需要，多設定一個 `today.getTime()`
-最後會取出一段數字 ex.1580911069807 (由 1970年1月1日零時零分計起到目前時間) 單位:(毫秒)
+<br>另外因為排序需要，多設定一個 `today.getTime()`
+<br>最後會取出一段數字 ex.1580911069807 (由 1970年1月1日零時零分計起到目前時間) 單位:(毫秒)
 ```
 function nowDate($date) {
     let today = new Date();
