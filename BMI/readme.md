@@ -39,6 +39,7 @@ BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="95" style="ve
 
 ### 變更顏色
 <img src="webroot/images/bmi_03.png" width="300">
+
 依照標示文件需求，不同 BMI 數值會在結果圓圈搭配不同顏色
 <br>所以在設計 CSS 時，先把需要變更的部分獨立出來，方便 Javascripts 切換使用
 ```
