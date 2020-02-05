@@ -43,7 +43,9 @@ function update(recordItem) {
 
 // ----- 計算 BMI ----- //
 function calculate() {
-    let $bmi = Math.round((weight.value/Math.pow(height.value/100,2))*100)/100;
+    let $w = weight.value;
+    let $h = height.value/100;
+    let $bmi = Math.round( ($w/Math.pow($h, 2)) * 100 ) / 100;
     bmi.textContent = $bmi;
     result.style.display = 'block';
     btn.style.display = 'none';
@@ -113,8 +115,9 @@ function nowDate($date) {
     let YY = today.getFullYear();
     let MM = (today.getMonth() + 1 < 10 ? '0' : '')+(today.getMonth() + 1);
     let dd = (today.getDate() < 10 ? '0' : '')+today.getDate();
+    let tt = today.getTime();
     $date = MM + '-' + dd + '-' + YY ;
-    return {_date: $date, _time: today};
+    return {_date: $date, _time: tt};
 }
 
 // ----- 檢查 input 內容是否正確 ----- //
