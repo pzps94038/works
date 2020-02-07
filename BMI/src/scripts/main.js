@@ -89,13 +89,15 @@ function calculate() {
         time: nowDate()._time
     };
 
+    // 把陣列加進 save 除儲存庫裡
+    save.push(array);
+
     // 新增資料按照建立時間排序
     save.sort(function(a, b){
         return new Date(b.time) - new Date(a.time); 
     })
 
-    // 儲存 LS
-    save.push(array);
+    // 儲存並更新 LS
     let toString = JSON.stringify(save);
     localStorage.setItem('record', toString);
     update(save);
@@ -176,13 +178,25 @@ function clearData (e) {
 }
 
 // ----- 鍵盤控制 ----- //
-document.body.addEventListener('keydown', function(e){
+let entKey = 0;
+function keyCtrl(e) {
+    let alert_chk = blurCheck(inputs)._chk;
     if(e.keyCode == 13) { 
-        checkFun();
+        if ( entKey == 1 ) {
+            entKey = 0;
+            renewFun();
+        } else if ( entKey == 0 && alert_chk !== true ) {
+            checkFun();
+        } else {
+            entKey = 1;
+            checkFun();
+        }
     } else { return };
-})
+}
+
 
 // ----- 更新與監聽 ----- //
 btn.addEventListener('click', checkFun);
 recordBox.addEventListener('click', clearData);
+document.body.addEventListener('keydown', keyCtrl);
 update(save);
