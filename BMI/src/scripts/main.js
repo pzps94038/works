@@ -12,7 +12,7 @@ const msg = getElement('.rst-msg');
 const renew = getElement('#btn-result'); // 重新輸入按鈕
 const recordBox = getElement('.listBox'); // 顯示列表
 
-// ----- 儲存 LS----- //
+// ----- 儲存 LocalStorage ----- //
 const save = JSON.parse(localStorage.getItem('record')) || [];
 
 // ----- 產生列表 ----- //
