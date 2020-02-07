@@ -15,7 +15,7 @@
 
 擴充功能：
 * 檢查 input 值是否正確
-* BMI 紀錄排序（目前尚有問題）
+* BMI 紀錄排序
 * 刪除紀錄
 
 ---
@@ -36,7 +36,7 @@ BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="90">
 
 ```Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100```
 
----
+<br><br>
 
 ### 變更顏色
 <img src="webroot/images/bmi_03.png" width="300">
@@ -58,7 +58,7 @@ const colors = ['#86D73F', '#31BAF9', '#FF982D', '#FF6C03', '#FF1200'];
 changeColor(colors[2]);
 ```
 
----
+<br><br>
 
 ### 抓取時間
 `getMonth()` 取得月份從 0 開始算起，所以需要+1
@@ -76,7 +76,7 @@ function nowDate($date) {
 }
 ```
 
----
+<br><br>
 
 ### 數字補零 - 三元運算子
 `a ? b : c` 運算子可當做 `if...else` 陳述式的簡短表示法
@@ -95,5 +95,7 @@ if ( today.getDate < 10 ) {
 
 [參考資料](http://zhi-yuan-chenge.blogspot.com/2015/10/jsjavascript_16.html)
 
+<br><br>
+  
 
 
