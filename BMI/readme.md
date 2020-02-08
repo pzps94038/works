@@ -221,7 +221,7 @@ function update(recordItem) {
 ```
 > => let getAry = JSON.parse(localStorage.getItem('record')) || [];
 
-**簡化之後的作法**
+**簡化之後的做法**
 ```
 1. const save = JSON.parse(localStorage.getItem('record')) || []; //把 LS 內容轉成陣列，並移到外面宣告
 2. save.push(obj); // 把 obj 的值 push 到 save 的空陣列
@@ -241,5 +241,4 @@ save.sort(function(a, b){
 ---
 
 ### 結語
-以上就是這次實作過程，雖然還不是很熟悉但透過各種應用，再把不懂的地方重看一遍
-<br>覺得自己也有稍稍的進步一些，如果觀念上有任何問題還請不吝指教，感謝！｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡
+以上就是這次實作過程，如果觀念上有任何問題還請不吝指教，感謝！｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡
