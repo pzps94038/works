@@ -79,7 +79,7 @@ function calculate() {
     }
     
     // LS 陣列
-    let array = {
+    let obj = {
         color: tag,
         txt: msg.textContent,
         bmi: $bmi,
@@ -89,8 +89,8 @@ function calculate() {
         time: nowDate()._time
     };
 
-    // 把陣列加進 save 除儲存庫裡
-    save.push(array);
+    // 把陣列加進 save 儲存庫裡
+    save.push(obj);
 
     // 新增資料按照建立時間排序
     save.sort(function(a, b){
@@ -126,10 +126,10 @@ function nowDate($date) {
 const inputs = document.querySelectorAll('.inputBox input');
 function blurCheck($input) {
     const txt = [' 身高', ' 體重'];
-    let msg = '';
-    let chk = true;
+    let msg = '';   // 訊息
+    let chk = true; // 檢查布林值
     for (let i=0; i<$input.length; i++) {
-        if ($input[i].value.trim() == '' || isNaN($input[i].value)) {
+        if ( $input[i].value == 0 || $input[i].value.trim() == '' || isNaN($input[i].value) ) {
             $input[i].classList.add('focus');
             msg += txt[i];
             chk = false;

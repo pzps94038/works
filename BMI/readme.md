@@ -14,7 +14,7 @@
 * 儲存 LocalStorage 紀錄 BMI 等數值
 
 擴充功能：
-* 檢查 input 值是否正確
+* 檢查輸入內容是否正確
 * BMI 紀錄排序
 * 刪除紀錄
 
@@ -76,10 +76,13 @@ function nowDate($date) {
 }
 ```
 
+參考資料：[javascript時間Date()介紹與補零應用的技巧](http://zhi-yuan-chenge.blogspot.com/2015/10/jsjavascript_16.html)
+
 <br><br>
 
 ### 數字補零 - 三元運算子
-`a ? b : c` 運算子可當做 `if...else` 陳述式的簡短表示法
+`a ? b : c` 運算子可當做 `if...else` 陳述式的簡短表示法：
+<br>「 若日期小於10，在前面補0，反之則不補0 」
 ```
 (today.getDate() < 10 ? '0' : '')+today.getDate()
 ```
@@ -93,9 +96,150 @@ if ( today.getDate < 10 ) {
 }
 ```
 
-[參考資料](http://zhi-yuan-chenge.blogspot.com/2015/10/jsjavascript_16.html)
+參考資料：[條件 (三元) 運算子](https://docs.microsoft.com/zh-tw/previous-versions/visualstudio/visual-studio-2010/zakwfxx4(v=vs.100)?redirectedfrom=MSDN)
+<br>補充資料：[運算子優先順序](https://docs.microsoft.com/zh-tw/previous-versions/visualstudio/visual-studio-2010/fatf1t6a%28v%3dvs.100%29)
 
 <br><br>
-  
 
+### 檢查輸入框
+<img src="webroot/images/bmi_04.png" width="700">
 
+這裡我希望可以增加一個防呆檢查機制：
+* 如果輸入的內容不等於0、空白、或非數字，才可以進行計算
+* 反之則跳出提醒視窗
+
+首先設定好條件：
+```
+1. $input[i].value == 0 // 內容等於0
+2. $input[i].value.trim() == '' // 內容空白
+3. isNaN($input[i].value) // 內容非數字
+```
+
+分別宣告一個放訊息和判斷內容的變數 `let msg = ''`、`let chk = true`
+<br>然後再用迴圈把條件和判斷放進去，並且回傳 `msg`、`chk`的值：
+```
+const txt = [' 身高', ' 體重'];
+let msg = '';   // 判斷訊息
+let chk = true; // 判斷布林值
+for (let i=0; i<$input.length; i++) {
+    if ( $input[i].value == 0 || $input[i].value.trim() == '' || isNaN($input[i].value) ) {
+        $input[i].classList.add('focus'); // blur失焦事件樣式
+        msg += txt[i];
+        chk = false;
+    } else {
+        $input[i].classList.remove('focus');
+    }
+}
+return {_msg: msg, _chk: chk}
+```
+
+接著再用一個檢查函式來判斷剛剛檢查的結果：
+* 若判斷後的值為 `true`，則開始計算
+* 若判斷後的值為 `false`，則跳出提醒視窗，並觸發 `blur` 事件
+```
+function checkFun() {
+    let alert_msg = blurCheck(inputs)._msg; // 判斷後的訊息
+    let alert_chk = blurCheck(inputs)._chk; // 判斷後的結果
+    if ( alert_chk === true ) {
+        calculate();
+    } else {
+        alert('請輸入您的' + alert_msg);
+
+        // 用遍歷的方式觸發 blur 事件
+        inputs.forEach(function($item){
+            $item.addEventListener('blur', function(){
+                blurCheck(inputs);
+            });
+        })
+        return false;
+    }
+}
+```
+
+<br><br>
+
+### 儲存 LocalStorage
+基本功能都做好了計算也都沒有問題，接下來就是要儲存到 LocalStorage
+<br>首先設定好我們需要儲存的內容：
+```
+let obj = {
+    color: tag, // 顏色條
+    txt: msg.textContent, // 計算範圍結果
+    bmi: $bmi, // ＢＭＩ值
+    weight: weight.value, // 體重
+    height: height.value, // 身高
+    date:  nowDate()._date, // 紀錄日期
+    time: nowDate()._time // 排序用的時間（畫面上不會顯示）
+}
+```
+
+接著，要寫要呈現在畫面的元件
+```
+function update(recordItem) {
+    let cont = '';
+    for (let i=0; i<recordItem.length; i++) {
+        cont += 
+        `<li data-list=${i}>
+            <div class="list-msg">
+                <span class="tag ${recordItem[i].color}"></span>
+                <span class="txt">${recordItem[i].txt}</span>
+            </div>
+            <div class="list-bmi">${recordItem[i].bmi}</div>
+            <div class="list-weight">${recordItem[i].weight}kg</div>
+            <div class="list-height">${recordItem[i].height}cm</div>
+            <div class="list-date">${recordItem[i].date}</div>
+            <i class="material-icons delete"  data-clear="${i}">delete</i>
+        </li>`
+    }
+
+    // 判斷沒有資料時，顯示文字
+    if (save.length >= 1) {
+        recordBox.innerHTML = cont;
+    } else {
+        recordBox.innerHTML = '還沒有BMI紀錄，快來面對現實吧！';
+    }
+}
+```
+
+因為 LocalStorage 會自動把內容轉成字串，所以：
+**原本的做法**
+```
+**存入資料**
+1. let array = []; // 宣告一個空陣列
+2. array.push(obj); // 置入obj
+3. let toString = JSON.stringify(array); // 宣告並把陣列轉成字串
+4. localStorage.setItem('record', toString); // 取名 record 並存入 LS
+```
+> => localStorage.setItem('record', JSON.stringify(array));
+
+```
+**取出資料**
+1. let getString = localStorage.getItem('record'); // 宣告並從 record 取出 string
+2. let getAry = JSON.parse(getString); // 宣告並將 getString 這個 string 轉回陣列
+=> let getAry = JSON.parse(getString) || []; // 若沒有資料則給空陣列
+```
+> => let getAry = JSON.parse(localStorage.getItem('record')) || [];
+
+**簡化之後的作法**
+```
+1. const save = JSON.parse(localStorage.getItem('record')) || [];
+=> 把 LS 內容轉成陣列，並移到外面宣告
+2. save.push(obj); // 把 obj 的值 push 到 save 的空陣列
+3. localStorage.setItem('record', JSON.stringify(save)); // 把陣列存到 LS 並轉成字串
+4. update(save); // 執行 update 並取出 save 資料
+```
+
+**新增資料按照建立時間排序**
+最後，之前提到在畫面上不會顯示的 `time: nowDate()._time`
+<br>這裡用 sort 把取出的最近一筆資料依照順序往下排列
+```
+save.sort(function(a, b){
+    return new Date(b.time) - new Date(a.time); 
+})
+```
+
+---
+
+### 結語
+以上就是這次實作過程，雖然還不是很熟悉但透過各種應用再把不懂的地方重看一遍
+<br>覺得自己也有稍稍的進步一些，如果觀念上有任何問題還請不吝指教，感謝！｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡
