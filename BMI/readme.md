@@ -134,7 +134,7 @@ return {_msg: msg, _chk: chk}
 ```
 
 接著再用一個檢查函式來判斷剛剛檢查的結果：
-* 若判斷後的值為 `true`，則開始計算
+* 若判斷後的值為 `true`，開始計算
 * 若判斷後的值為 `false`，則跳出提醒視窗，並觸發 `blur` 事件
 ```
 function checkFun() {
@@ -202,6 +202,7 @@ function update(recordItem) {
 ```
 
 因為 LocalStorage 會自動把內容轉成字串，所以：
+<br>
 **原本的做法**
 ```
 **存入資料**
@@ -222,15 +223,14 @@ function update(recordItem) {
 
 **簡化之後的作法**
 ```
-1. const save = JSON.parse(localStorage.getItem('record')) || [];
-=> 把 LS 內容轉成陣列，並移到外面宣告
+1. const save = JSON.parse(localStorage.getItem('record')) || []; //把 LS 內容轉成陣列，並移到外面宣告
 2. save.push(obj); // 把 obj 的值 push 到 save 的空陣列
 3. localStorage.setItem('record', JSON.stringify(save)); // 把陣列存到 LS 並轉成字串
 4. update(save); // 執行 update 並取出 save 資料
 ```
 
 **新增資料按照建立時間排序**
-最後，之前提到在畫面上不會顯示的 `time: nowDate()._time`
+<br>最後，之前提到在畫面上不會顯示的 `time: nowDate()._time`
 <br>這裡用 sort 把取出的最近一筆資料依照順序往下排列
 ```
 save.sort(function(a, b){
@@ -241,5 +241,5 @@ save.sort(function(a, b){
 ---
 
 ### 結語
-以上就是這次實作過程，雖然還不是很熟悉但透過各種應用再把不懂的地方重看一遍
+以上就是這次實作過程，雖然還不是很熟悉但透過各種應用，再把不懂的地方重看一遍
 <br>覺得自己也有稍稍的進步一些，如果觀念上有任何問題還請不吝指教，感謝！｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡
