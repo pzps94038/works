@@ -2,6 +2,5 @@ node_modules/
 .DS_Store
 .tmp
 vendors
-webroot
 package-lock.json
 works.code-workspace
