@@ -74,12 +74,12 @@ export function images(){
 }
 
 // 圖片壓縮
-// export function imageMin(){
-// 	return gulp
-// 		.src([path.source + 'images/*'])
-// 		.pipe($.image())
-// 		.pipe(gulp.dest(path.webroot + 'images'))
-// }
+export function imageMin(){
+	return gulp
+		.src([path.source + 'images/*'])
+		.pipe($.imagemin())
+		.pipe(gulp.dest(path.webroot + 'images'))
+}
 
 // JS插件版本控制
 export function bower(){
@@ -99,7 +99,7 @@ export function vendorJs(){
 export function bowerTask() {
 	browserSync.init({
 		server: {
-			baseDir: path.webroot
+			baseDir: './'
 		}
 	})
 }
@@ -123,5 +123,5 @@ exports.default = gulp.parallel(
 // gulp build --env webroot
 exports.build = gulp.series(
   gulp.series(clean, bower, vendorJs),
-  gulp.parallel(pug, style, scripts)
+  gulp.parallel(pug, style, scripts, imageMin)
 )
