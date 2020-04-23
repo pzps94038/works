@@ -1,39 +1,41 @@
 {
-  "name": "works",
+  "name": "demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "del": "^2.2.2",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.4.1",
-    "gulp-watch": "^4.3.11"
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^3.0.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-load-plugins": "^2.0.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "main-bower-files": "^2.13.3",
+    "minimist": "^1.2.5",
+    "node-sass": "^4.14.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.8",
-    "clean": "^4.0.2",
-    "gulp": "^3.9.1",
-    "gulp-changed": "^2.0.0",
-    "gulp-copy": "^1.0.0",
-    "gulp-html-beautify": "^1.0.1",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-livereload": "^3.8.1",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-pug": "^3.3.0",
-    "gulp-ruby-sass": "^2.1.1",
-    "gulp-svg-sprite": "^1.5.0",
-    "gulp-svgo": "^2.1.1",
-    "gulp-watch": "^4.3.11",
-    "install": "^0.8.7",
-    "require-dir": "^0.3.1",
-    "sass-loader": "^7.1.0"
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0"
   },
+  "browserslist": [
+    "> 1%",
+    "last 5 versions",
+    "not ie <= 8"
+  ],
   "scripts": {
-    "start": "gulp"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Erica",
   "license": "ISC"
 }

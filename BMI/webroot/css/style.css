@@ -4,85 +4,77 @@
 body {
   background: #eeeeee;
   color: #444444;
-  min-width: 640px;
-}
-
-body .wrapper {
-  max-width: calc(1024px - 170px*2);
-  margin: 0 auto;
-  padding: 0 170px;
-}
+  min-width: 640px; }
+  body .wrapper {
+    max-width: calc(1024px - 170px*2);
+    margin: 0 auto;
+    padding: 0 170px; }
 
 .footer {
   height: 90px;
   background: #FFD366;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-}
-
-.footer img {
-  width: 55px;
-}
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .footer img {
+    width: 55px; }
 
 .header {
-  background: #444444;
-}
-
-.header .wrapper {
-  height: 300px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center;
-  padding: 0 170px;
-}
-
-.header .logo {
-  width: 117px;
-}
-
-.header .inputBox span {
-  display: block;
-  color: #FFD366;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.header .inputBox input {
-  background: rgba(255, 255, 255, 0.18);
-  border: 2px solid #FFD366;
-  padding: 8px 10px 7px;
-  font-size: 20px;
-  color: #FFFFFF;
-  border-radius: 10px;
-  transition: all 0.1s linear;
-}
-
-.header .inputBox input:-ms-input-placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.header .inputBox input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.header .inputBox input + span {
-  margin-top: 23px;
-}
-
-.header .inputBox input.focus {
-  background: rgba(255, 96, 125, 0.15);
-  border: 2px solid #ff607d;
-  -ms-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
-  -o-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
-  box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
-}
+  background: #444444; }
+  .header .wrapper {
+    height: 300px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0 170px; }
+  .header .logo {
+    width: 117px; }
+  .header .inputBox span {
+    display: block;
+    color: #FFD366;
+    font-size: 18px;
+    margin-bottom: 5px; }
+  .header .inputBox input {
+    background: rgba(255, 255, 255, 0.18);
+    border: 2px solid #FFD366;
+    padding: 8px 10px 7px;
+    font-size: 20px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    -webkit-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
+    .header .inputBox input::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.7); }
+    .header .inputBox input::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.7); }
+    .header .inputBox input:-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.7); }
+    .header .inputBox input::-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.7); }
+    .header .inputBox input::placeholder {
+      color: rgba(255, 255, 255, 0.7); }
+    .header .inputBox input + span {
+      margin-top: 23px; }
+    .header .inputBox input.focus {
+      background: rgba(255, 96, 125, 0.15);
+      border: 2px solid #ff607d;
+      -webkit-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
+      -ms-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
+      -o-box-shadow: 0 0 10px rgba(255, 96, 125, 0.5);
+      box-shadow: 0 0 10px rgba(255, 96, 125, 0.5); }
 
 #btn-calculator {
   width: 120px;
@@ -92,22 +84,21 @@ body .wrapper {
   border: 0;
   color: #444444;
   border-radius: 100%;
-  transition: all 0.15s linear;
-}
-
-#btn-calculator:hover {
-  cursor: pointer;
-  -ms-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
-  -o-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
-  box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
-}
-
-#btn-calculator:active {
-  background: #DEA821;
-  -ms-box-shadow: 0 0 0 transparent;
-  -o-box-shadow: 0 0 0 transparent;
-  box-shadow: 0 0 0 transparent;
-}
+  -webkit-transition: all 0.15s linear;
+  -o-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+  #btn-calculator:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+    -ms-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+    -o-box-shadow: 0 0 8px rgba(255, 196, 50, 0.64);
+    box-shadow: 0 0 8px rgba(255, 196, 50, 0.64); }
+  #btn-calculator:active {
+    background: #DEA821;
+    -webkit-box-shadow: 0 0 0 transparent;
+    -ms-box-shadow: 0 0 0 transparent;
+    -o-box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 transparent; }
 
 #result {
   display: none;
@@ -119,57 +110,52 @@ body .wrapper {
   border: 0;
   color: #FFD366;
   border-radius: 100%;
-  transition: all 0.15s linear;
-}
-
-#result:after {
-  content: '';
-  z-index: 1;
-  width: 108px;
-  height: 108px;
-  background: #444444;
-  border-radius: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-}
-
-#result div {
-  z-index: 2;
-}
-
-#result .rst-num {
-  font-size: 32px;
-  position: absolute;
-  top: 47%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-}
-
-#result .rst-num:after {
-  content: 'BMI';
-  font-size: 14px;
-  position: absolute;
-  left: 50%;
-  -ms-transform: translateX(-50%);
-      transform: translateX(-50%);
-  top: 100%;
-  margin-top: -5px;
-}
-
-#result .rst-msg {
-  white-space: nowrap;
-  font-size: 30px;
-  left: 100%;
-  margin-left: 15px;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
-}
+  -webkit-transition: all 0.15s linear;
+  -o-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+  #result:after {
+    content: '';
+    z-index: 1;
+    width: 108px;
+    height: 108px;
+    background: #444444;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+  #result div {
+    z-index: 2; }
+  #result .rst-num {
+    font-size: 32px;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+    #result .rst-num:after {
+      content: 'BMI';
+      font-size: 14px;
+      position: absolute;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+              transform: translateX(-50%);
+      top: 100%;
+      margin-top: -5px; }
+  #result .rst-msg {
+    white-space: nowrap;
+    font-size: 30px;
+    left: 100%;
+    margin-left: 15px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%); }
 
 #btn-result {
   position: absolute;
@@ -184,158 +170,130 @@ body .wrapper {
   border: 3px solid #444444;
   cursor: pointer;
   border-radius: 100%;
-  transition: all 0.2s linear;
-}
-
-#btn-result i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-}
-
-#btn-result:hover {
-  -khtml-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear; }
+  #btn-result i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+  #btn-result:hover {
+    -webkit-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg); }
 
 .record {
-  padding: 48px 0;
-}
-
-.record .wrapper {
-  min-height: calc(100vh - 390px - 48px*2);
-}
-
-.record h2 {
-  font-size: 24px;
-  text-align: center;
-}
+  padding: 48px 0; }
+  .record .wrapper {
+    min-height: calc(100vh - 390px - 48px*2); }
+  .record h2 {
+    font-size: 24px;
+    text-align: center; }
 
 .listBox {
   margin-top: 36px;
-  text-align: center;
-}
-
-.listBox li {
-  background: #FFFFFF;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center;
-  position: relative;
-}
-
-.listBox li + li {
-  margin-top: 16px;
-}
-
-.listBox li .list-msg {
-  position: relative;
-  min-width: 65px;
-  padding: 20px 10px 20px 30px;
-  overflow: hidden;
-}
-
-.listBox li .list-msg span {
-  display: block;
-}
-
-.listBox li .list-msg .tag {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 7px;
-  height: 100%;
-}
-
-.listBox li .list-msg .tag.green {
-  background: #86D73F;
-  -ms-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
-  -o-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
-  box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
-}
-
-.listBox li .list-msg .tag.blue {
-  background: #31BAF9;
-  -ms-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
-  -o-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
-  box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
-}
-
-.listBox li .list-msg .tag.orange1 {
-  background: #FF982D;
-  -ms-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
-  -o-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
-  box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
-}
-
-.listBox li .list-msg .tag.orange2 {
-  background: #FF6C03;
-  -ms-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
-  -o-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
-  box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
-}
-
-.listBox li .list-msg .tag.red {
-  background: #FF1200;
-  -ms-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
-  -o-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
-  box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
-}
-
-.listBox li div {
-  padding: 0 20px;
-  font-size: 16px;
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-}
-
-.listBox li div:before {
-  display: inline-block;
-  font-size: 12px;
-  margin-right: 7px;
-}
-
-.listBox li .list-bmi:before {
-  content: 'BMI';
-}
-
-.listBox li .list-height:before {
-  content: 'height';
-}
-
-.listBox li .list-weight:before {
-  content: 'weight';
-}
-
-.listBox li .list-date {
-  font-size: 12px;
-  padding: 0;
-}
-
-.listBox li .delete {
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-  cursor: pointer;
-  opacity: .2;
-  transition: all 0.15s linear;
-}
-
-.listBox li .delete:hover {
-  opacity: 1;
-}
+  text-align: center; }
+  .listBox li {
+    background: #FFFFFF;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: relative; }
+    .listBox li + li {
+      margin-top: 16px; }
+    .listBox li .list-msg {
+      position: relative;
+      min-width: 65px;
+      padding: 20px 10px 20px 30px;
+      overflow: hidden; }
+      .listBox li .list-msg span {
+        display: block; }
+      .listBox li .list-msg .tag {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 7px;
+        height: 100%; }
+        .listBox li .list-msg .tag.green {
+          background: #86D73F;
+          -webkit-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+          -ms-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+          -o-box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5);
+          box-shadow: 1px 0 5px rgba(134, 215, 63, 0.5); }
+        .listBox li .list-msg .tag.blue {
+          background: #31BAF9;
+          -webkit-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+          -ms-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+          -o-box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5);
+          box-shadow: 1px 0 5px rgba(49, 186, 249, 0.5); }
+        .listBox li .list-msg .tag.orange1 {
+          background: #FF982D;
+          -webkit-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+          -ms-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+          -o-box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5);
+          box-shadow: 1px 0 5px rgba(255, 152, 45, 0.5); }
+        .listBox li .list-msg .tag.orange2 {
+          background: #FF6C03;
+          -webkit-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+          -ms-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+          -o-box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5);
+          box-shadow: 1px 0 5px rgba(255, 108, 3, 0.5); }
+        .listBox li .list-msg .tag.red {
+          background: #FF1200;
+          -webkit-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
+          -ms-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
+          -o-box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5);
+          box-shadow: 1px 0 5px rgba(255, 18, 0, 0.5); }
+    .listBox li div {
+      padding: 0 20px;
+      font-size: 16px;
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+      .listBox li div:before {
+        display: inline-block;
+        font-size: 12px;
+        margin-right: 7px; }
+    .listBox li .list-bmi:before {
+      content: 'BMI'; }
+    .listBox li .list-height:before {
+      content: 'height'; }
+    .listBox li .list-weight:before {
+      content: 'weight'; }
+    .listBox li .list-date {
+      font-size: 12px;
+      padding: 0; }
+    .listBox li .delete {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      cursor: pointer;
+      opacity: .2;
+      -webkit-transition: all 0.15s linear;
+      -o-transition: all 0.15s linear;
+      transition: all 0.15s linear; }
+      .listBox li .delete:hover {
+        opacity: 1; }
