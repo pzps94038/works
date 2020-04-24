@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <title>高雄旅遊資訊</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width initial-scale=1 minimum-scale=1.0 maximum-scale=1.0 user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <base href="./">
+    <script src="webroot/scripts/all.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="webroot/css/style.css">
+  </head>
+  <body>
+    <!--container-->
+    <div class="wrapper">
+      <div class="header">
+        <h1>高雄旅遊資訊</h1>
+        <div class="select-box">
+          <input id="list-open" type="radio" name="city">
+          <label class="list-btn" for="list-open"></label>
+          <input id="list-close" type="radio" name="city">
+          <label class="list-btn" for="list-close"></label><span class="list-arrow"></span>
+          <ul class="select-wrap">
+            <li>
+              <input type="radio" id="list[0]" name="city" checked>
+              <label class="select-option select-placeholder" for="list[0]">-- 請選擇行政區 --</label>
+            </li>
+            <li>
+              <input type="radio" id="list[1]" name="city">
+              <label class="select-option" for="list[1]">苓雅區</label>
+            </li>
+            <li>
+              <input type="radio" id="list[2]" name="city">
+              <label class="select-option" for="list[2]">三民區</label>
+            </li>
+            <li>
+              <input type="radio" id="list[3]" name="city">
+              <label class="select-option" for="list[3]">新興區</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container"></div>
+    </div>
+  </body>
+</html>

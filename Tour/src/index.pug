@@ -1,0 +1,32 @@
+extends ./pages/_layout.pug
+block append title
+  title 高雄旅遊資訊
+block append js
+  script(src="webroot/scripts/all.js", defer)
+block append css
+  link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
+block append content
+  .wrapper
+    .header
+      h1 高雄旅遊資訊
+      .select-box
+        input#list-open(type='radio', name='city')
+        label.list-btn(for='list-open')
+        input#list-close(type='radio', name='city')
+        label.list-btn(for='list-close')
+        span.list-arrow
+        ul.select-wrap
+          li
+            input(type='radio', id='list[0]', name='city', checked)
+            label.select-option.select-placeholder(for='list[0]') -- 請選擇行政區 --
+          li
+            input(type='radio', id='list[1]', name='city')
+            label.select-option(for='list[1]') 苓雅區
+          li
+            input(type='radio', id='list[2]', name='city')
+            label.select-option(for='list[2]') 三民區
+          li
+            input(type='radio', id='list[3]', name='city')
+            label.select-option(for='list[3]') 新興區
+
+    .container
