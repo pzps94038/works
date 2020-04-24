@@ -36,6 +36,19 @@ BMI 的計算公式為 <img src="webroot/images/bmi_02.svg" width="90">
 
 ```Math.round( (體重/Math.pow(身高/100, 2)) * 100 ) / 100```
 
+<font color="red">**04/24更新 獨立狀態管理**</font>
+<br>感謝助教 Ray 的建議，把 BMI 計算和 LS 儲存分別獨立管理
+<br>改成用 return 回傳各值後再帶入 saveLS 函式儲存
+```
+return {
+    _bmi: $bmi, 
+    _weight: weight.value, 
+    _height: height.value, 
+    _msg: msg.textContent, 
+    _tag: tag
+}
+```
+
 <br><br>
 
 ### 變更顏色
@@ -160,14 +173,16 @@ function checkFun() {
 
 ### 儲存 LocalStorage
 基本功能都做好了計算也都沒有問題，接下來就是要儲存到 LocalStorage
-<br>首先設定好我們需要儲存的內容：
+<br>
+<font color="red">**04/24更新**</font>
+首先設定好我們需要儲存的內容：
 ```
 let obj = {
-    color: tag, // 顏色條
-    txt: msg.textContent, // 計算範圍結果
-    bmi: $bmi, // ＢＭＩ值
-    weight: weight.value, // 體重
-    height: height.value, // 身高
+    color: calculate()._tag, // 顏色條
+    txt: calculate()._msg, // 計算範圍結果
+    bmi: calculate()._bmi, // ＢＭＩ值
+    weight: calculate()._weight, // 體重
+    height: calculate()._height, // 身高
     date:  nowDate()._date, // 紀錄日期
     time: nowDate()._time // 排序用的時間（畫面上不會顯示）
 }

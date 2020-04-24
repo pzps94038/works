@@ -12,7 +12,6 @@ const msg = getElement('.rst-msg');
 const renew = getElement('#btn-result'); // 重新輸入按鈕
 const recordBox = getElement('.listBox'); // 顯示列表
 
-// ----- 儲存 LocalStorage ----- //
 const save = JSON.parse(localStorage.getItem('record')) || [];
 
 // ----- 產生列表 ----- //
@@ -55,40 +54,49 @@ function calculate() {
     if ( $bmi <= 18.5 ) {
         changeColor(colors[1]);
         tag = 'blue';
-        msg.textContent += '過輕';
+        msg.textContent = '過輕';
     } else if ( 18.5 < $bmi && $bmi <= 25 ) {
         changeColor(colors[0]);
         tag = 'green';
-        msg.textContent += '理想';
+        msg.textContent = '理想';
     } else if ( 25 < $bmi && $bmi <= 30 ) {
         changeColor(colors[2]);
         tag = 'orange1';
-        msg.textContent += '過重';
+        msg.textContent = '過重';
     } else if ( 30 < $bmi && $bmi <= 35 ) {
         changeColor(colors[3]);
         tag = 'orange2';
-        msg.textContent += '輕度肥胖';
+        msg.textContent = '輕度肥胖';
     } else if ( 35 < $bmi && $bmi <= 40 ) {
         changeColor(colors[3]);
         tag = 'orange2';
-        msg.textContent += '中度肥胖';
+        msg.textContent = '中度肥胖';
     } else if ( 40 < $bmi ) {
         changeColor(colors[4]);
         tag = 'red';
-        msg.textContent += '重度肥胖';
+        msg.textContent = '重度肥胖';
     }
-    
+    return {
+        _bmi: $bmi, 
+        _weight: weight.value, 
+        _height: height.value, 
+        _msg: msg.textContent, 
+        _tag: tag
+    }
+}
+
+// ----- 儲存 LocalStorage ----- //
+function saveLS () {
     // LS 陣列
     let obj = {
-        color: tag,
-        txt: msg.textContent,
-        bmi: $bmi,
-        weight: weight.value,
-        height: height.value,
+        color: calculate()._tag,
+        txt: calculate()._msg,
+        bmi: calculate()._bmi,
+        weight: calculate()._weight,
+        height: calculate()._height,
         date:  nowDate()._date,
         time: nowDate()._time
-    };
-
+    }
     // 把陣列加進 save 儲存庫裡
     save.push(obj);
 
@@ -145,6 +153,7 @@ function checkFun() {
     let alert_chk = blurCheck(inputs)._chk;
     if ( alert_chk === true ) {
         calculate();
+        saveLS();
     } else {
         alert('請輸入您的' + alert_msg);
 
@@ -181,8 +190,8 @@ function clearData (e) {
 let entKey = 0;
 function keyCtrl(e) {
     let alert_chk = blurCheck(inputs)._chk;
-    if(e.keyCode == 13) { 
-        if ( entKey == 1 ) {
+    if(e.keyCode === 13) { 
+        if ( entKey === 1 ) {
             entKey = 0;
             renewFun();
         } else if ( entKey == 0 && alert_chk !== true ) {
