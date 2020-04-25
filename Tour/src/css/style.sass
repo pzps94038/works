@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap')
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons')
 @import 'mixins'
 @import 'main/base.css'
+@import 'select.css'
 *
   // outline: 1px solid red
 
@@ -9,96 +9,194 @@
 $mainColor: #FFD366
 $b: #444444
 $w: #FFFFFF
-
+$purple: #8A82CC
+$orange: #FFA782
+$yellow: #F5D005
+$blue: #559AC8
 
 body
   background: #eeeeee
   color: $b
-  // min-width: 640px
+  min-width: 640px
   .wrapper
-    max-width: calc(1024px - 52px*2)
+    max-width: 1024px
     margin: 0 auto
 
 .header
   background: url(../images/main_bg.png) no-repeat 50% 0
   background-size: 1024px auto
   padding: 90px 0 0
-  height: calc(380px - 90px)
+  height: calc(350px - 90px)
   h1
     color: $w
     text-align: center
     font-size: 30px
-    letter-spacing: 5px
+    letter-spacing: 2px
 
-.select-box
+.container
+  margin-top: -30px
+
+.tags-box
+  width: 620px
+  margin: 0 auto
+  padding: 20px 50px
+  background: $w
+  +radius(3px)
+  +box-shadow(0, 1px, 3px, rgba($b, .2))
+  h2
+    font-size: 18px
+    letter-spacing: 1px
+  .tags
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-top: 15px
+    a
+      width: 130px
+      line-height: 42px
+      text-align: center
+      color: $w
+      +radius(5px)
+      +transition(all, .15s)
+      &:hover
+        opacity: .8
+
+._purple
+  +colors($purple)
+._orange
+  +colors($orange)
+._yellow
+  +colors($yellow)
+._blue
+  +colors($blue)
+
+.scroll-line
   position: relative
-  width: 450px
-  margin: 60px auto 0
-  &::after
-    content: ''
-    display: block
-    width: calc(100% - 4px)
-    height: 46px
-    border: 2px solid $w
-    +radius(3px)
-    +halign
-    top: -2px
-  input
-    display: none
-  .list-btn
+  width: 90%
+  height: 1px
+  background: url(../images/icon_line.png) repeat-x 50% 50%
+  margin: 40px auto
+  text-align: center
+  span
     position: absolute
-    display: block
-    top: 0 
-    left: 0
-    z-index: 2
-    width: 100%
-    height: 46px
+    top: 50%
+    left: 50%
+    font-size: 30px
+    color: $blue
+    background: #eee
+    padding: 5px
     cursor: pointer
-  .select-wrap
-    +box-shadow(0, 2px, 10px, rgba($b, .1))
-  .select-option
-    position: relative
-    display: block
-    width: 100%
-    z-index: 1
-    line-height: 46px
-    padding: 0 10px
-    cursor: pointer
+    transform: translate(-50%, -50%) rotate(90deg)
+
+.card-wrap
+  padding: 0 20px
+  .card-title
+    font-size: 28px
+    text-align: center
+    color: $purple
+    letter-spacing: 2px
+    margin-bottom: 30px
+  .card-box
+    display: flex
+    justify-content: space-between
+    flex-flow: row wrap
+  .card-item
+    width: 48.5%
     background: $w
-    display: none
-    +transition(all ,.1s)
-  .list-arrow
-    display: inline-block
+    margin-bottom: 30px
+    +box-shadow(0, 1px, 3px, rgba($b, .2))
+  .card-img
+    height: 160px
+    overflow: hidden
+    position: relative
+    img
+      width: 100%
+      +centeralign
+      z-index: 1
+  .card-txt
+    width: calc(100% - 20px)
+    padding: 10px
+    color: $w
+    font-size: 18px
     position: absolute
-    top: 21px
-    right: 15px
+    bottom: 0
     z-index: 2
-    pointer-events: none
-    +arrow(bottom, $b, 10px)
-    +transition(all ,.2s)
-  .select-placeholder
-    background: rgba($w, .7)
-    
-  input[type="radio"]:not(:checked) 
-    & + .select-option:hover
-      background: #eee
-    & + .select-placeholder:hover
-      background: rgba($w, .7)
+    display: flex
+    justify-content: space-between
+    .zone
+      font-size: 15px
+  .card-cont
+    padding: 10px
+    color: #000
+    font-size: 15px
+    position: relative
+    p
+      line-height: 2
+    a
+      color: #000
+    i
+      transform: translateY(30%)
+      margin-right: 5px
+      font-size: 20px
+    .ticketinfo
+      position: absolute
+      right: 10px
+      bottom: 10px
+    .opentime i
+      color: $purple
+    .add i
+      color: #f5a623
+    .tel i
+      color: $blue
+    .ticketinfo i
+      color: $yellow
 
-  input[type="radio"]:checked + .select-option
-    display: block
-
-  #list-close + .list-btn,
-  #list-open:checked + .list-btn
-    display: none
-
-  #list-open:checked 
-    & ~ .list-arrow
-      transform: translateY(-2px) scaleY(-1)
-    & ~ .select-wrap
-      li:nth-child(1)
-        margin-bottom: 10px
-        +transition(all ,.2s)
-      .select-option
-        display: block
+.page-list
+  text-align: center
+  display: flex
+  justify-content: center
+  align-items: center
+  li
+    padding: 10px
+    font-size: 14px
+    cursor: pointer
+    & + li
+      margin-left: 10px
+    &.active 
+      color: $blue
+    &.off
+      color: rgba($b, .4)
   
+.footer
+  background: $blue
+  color: $w
+  text-align: center
+  font-size: 14px
+  line-height: 2
+  padding: 20px 0
+  margin-top: 30px
+  a
+    color: $yellow
+
+
+#scroll-top
+  width: 36px
+  height: 36px
+  background: rgba($blue, .8)
+  text-align: center
+  position: fixed
+  bottom: 195px
+  right: 0
+  z-index: 9
+  cursor: pointer
+  +transition(all, .15s)
+  &:hover
+    background: $blue
+  i
+    display: block
+    color: $w
+    font-size: 25px
+    margin-top: -4px
+    +centeralign
+    & + i
+      margin-top: 4px

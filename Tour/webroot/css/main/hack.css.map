@@ -1,1 +1,0 @@
-{"version":3,"sources":["css/main/hack.sass"],"names":[],"mappings":"AACA,gDAAA;AACA,OAAA;AACA,gDAAA","file":"hack.css","sourcesContent":["@import '../mixins';\n/*---------------------------------------------*/\n/*hack*/\n/*---------------------------------------------*/\n@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {\n  .blk {} }\n"]}

@@ -5,6 +5,28 @@ block append js
   script(src="webroot/scripts/all.js", defer)
 block append css
   link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
+  
+mixin card
+  li.card-item
+    .card-img
+      .card-txt
+        .name 高雄願景
+        .zone 三民區
+      img(src="http://khh.travel/FileArtPic.ashx?id=979&w=1280&h=960", alt="")
+    .card-cont
+      p.opentime 
+        i.material-icons watch_later
+        | 全天候開放
+      p.add
+        i.material-icons place
+        | 高雄市三民區同盟三路與十全三路交叉處
+      p.tel
+        i.material-icons smartphone
+        a(href="tel:886-7-7995678") 886-7-7995678
+      p.ticketinfo
+        i.material-icons local_offer
+        | 免費參觀
+
 block append content
   .wrapper
     .header
@@ -28,5 +50,41 @@ block append content
           li
             input(type='radio', id='list[3]', name='city')
             label.select-option(for='list[3]') 新興區
-
     .container
+      .tags-box
+        h2 熱門行政區
+        .tags
+          a._purple(href="./") 苓雅區
+          a._orange(href="./") 三民區
+          a._yellow(href="./") 新興區
+          a._blue(href="./") 鹽埕區
+      .scroll-line
+        span.material-icons play_circle_outline
+      .card-wrap
+        .card-title 三民區
+        ul.card-box
+          +card
+          +card
+          +card
+          +card
+          +card
+          +card
+          +card
+          +card
+      #scroll-top
+        i.material-icons expand_less
+        i.material-icons expand_less
+
+   
+    ul.page-list
+      li.prev.off < prev
+      li 1
+      li.active 2
+      li 3
+      li 4
+      li 5
+      li.next next >
+
+    .footer
+      h3 高雄旅遊網
+      a(href="./", target="_blank") 資料來源：高雄市政府
