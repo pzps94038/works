@@ -1,0 +1,20 @@
+{
+  "name": "demo",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Erica"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.5.0"
+  }
+}

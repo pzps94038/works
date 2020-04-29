@@ -58,7 +58,7 @@ export function scripts(){
 		presets: ['@babel/env']
 	}))
 	.pipe($.concat('all.js'))
-	.pipe($.if(options.env === 'false', $.uglify({
+	.pipe($.if(options.env === 'true', $.uglify({
 		compress: {
 			drop_console: true
 		}
