@@ -21,7 +21,7 @@ export function pug() {
 	return gulp
 		.src([
 			path.source + '**/*.pug',
-			'!' +path.source + '**/*.pug'
+			'!' + path.source + '**/_*.pug'
 		])
 		.pipe($.plumber())
 		.pipe($.pug({
@@ -97,7 +97,7 @@ export function vendorJs(){
 	.pipe(gulp.dest(path.webroot + 'scripts'))
 }
 
-export function bowerTask() {
+export function browserTask() {
 	browserSync.init({
 		server: {
 			baseDir: './'
@@ -118,7 +118,7 @@ export function watch(){
 }
 
 exports.default = gulp.parallel(
-  pug, style, scripts, images, watch, bowerTask
+  pug, style, scripts, images, watch, browserTask
 )
 
 // gulp build --env true

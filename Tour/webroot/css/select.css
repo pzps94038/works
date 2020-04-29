@@ -83,3 +83,5 @@
     transition: all 0.2s linear; }
   .select-box #list-open:checked ~ .select-wrap .select-option {
     display: block; }
+
+/*# sourceMappingURL=select.css.map */
