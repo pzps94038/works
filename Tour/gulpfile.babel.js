@@ -20,7 +20,8 @@ var options = minimist(process.argv.slice(2), envOptions)
 export function pug() {
 	return gulp
 		.src([
-			path.source + '**/*.pug'
+			path.source + '**/*.pug',
+			'!' +path.source + '**/*.pug'
 		])
 		.pipe($.plumber())
 		.pipe($.pug({
@@ -57,7 +58,7 @@ export function scripts(){
 		presets: ['@babel/env']
 	}))
 	.pipe($.concat('all.js'))
-	.pipe($.if(options.env === 'true', $.uglify({
+	.pipe($.if(options.env === 'false', $.uglify({
 		compress: {
 			drop_console: true
 		}
@@ -84,7 +85,7 @@ export function imageMin(){
 // JS插件版本控制
 export function bower(){
 	return gulp.src(mainBowerFiles())
-	.pipe($.if(options.env, $.uglify()))
+	.pipe($.if(options.env === 'true', $.uglify()))
 	.pipe(gulp.dest([path.tmp + 'vendors']))
 }
 
@@ -92,7 +93,7 @@ export function bower(){
 export function vendorJs(){
 	return gulp.src([path.tmp + 'vendors/**/**.js'])
 	.pipe($.concat('vendor.js'))
-	.pipe($.if(options.env, $.uglify()))
+	.pipe($.if(options.env === 'true', $.uglify()))
 	.pipe(gulp.dest(path.webroot + 'scripts'))
 }
 
@@ -117,11 +118,11 @@ export function watch(){
 }
 
 exports.default = gulp.parallel(
-  pug, style, scripts, images, vendorJs, watch, bowerTask
+  pug, style, scripts, images, watch, bowerTask
 )
 
-// gulp build --env webroot
+// gulp build --env true
 exports.build = gulp.series(
-  gulp.series(clean, vendorJs),
+  gulp.series(clean),
   gulp.parallel(pug, style, scripts, imageMin)
 )
