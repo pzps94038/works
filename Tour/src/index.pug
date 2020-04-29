@@ -5,6 +5,7 @@ block append js
   script(src="webroot/scripts/all.js", defer)
 block append css
   link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
+  //- link(type="text/css", rel="stylesheet", href="webroot/css/select.css")
   
 mixin card
   li.card-item
@@ -38,18 +39,19 @@ block append content
         label.list-btn(for='list-close')
         span.list-arrow
         ul.select-wrap
-          li
+          li.placeholder
             input(type='radio', id='list[0]', name='city', checked)
             label.select-option.select-placeholder(for='list[0]') -- 請選擇行政區 --
-          li
-            input(type='radio', id='list[1]', name='city')
-            label.select-option(for='list[1]') 苓雅區
-          li
-            input(type='radio', id='list[2]', name='city')
-            label.select-option(for='list[2]') 三民區
-          li
-            input(type='radio', id='list[3]', name='city')
-            label.select-option(for='list[3]') 新興區
+          ol
+          //- li
+          //-   input(type='radio', id='list[1]', name='city')
+          //-   label.select-option(for='list[1]') 苓雅區
+          //- li
+          //-   input(type='radio', id='list[2]', name='city')
+          //-   label.select-option(for='list[2]') 三民區
+          //- li
+          //-   input(type='radio', id='list[3]', name='city')
+          //-   label.select-option(for='list[3]') 新興區
     .container
       .tags-box
         h2 熱門行政區
@@ -61,20 +63,11 @@ block append content
       .scroll-line
         span.material-icons play_circle_outline
       .card-wrap
-        .card-title 三民區
+        .card-title 高雄全區
         ul.card-box
-          +card
-          +card
-          +card
-          +card
-          +card
-          +card
-          +card
-          +card
       #scroll-top
-        a(href="#top")
-          i.material-icons expand_less
-          i.material-icons expand_less
+        i.material-icons expand_less
+        i.material-icons expand_less
 
    
     ul.page-list
