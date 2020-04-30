@@ -4,6 +4,11 @@ var getElemt = function getElemt(elemt) {
   return document.querySelector(elemt);
 };
 
+var cards = getElemt('.card-box');
+var Selector = getElemt('.select-wrap ol');
+var cardTitle = getElemt('.card-title');
+var select = '';
+var ZoneList = [];
 var xhr = new XMLHttpRequest();
 xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true);
 xhr.send(null);
@@ -11,40 +16,47 @@ xhr.send(null);
 xhr.onload = function () {
   var str = JSON.parse(xhr.responseText);
   var data = str.result.records;
-  var cards = getElemt('.card-box');
-  var cont = '';
 
-  for (var i = 0; i < data.length; i++) {
-    cont += "\n        <li class=\"card-item\">\n            <div class=\"card-img\">\n                <div class=\"card-txt\">\n                    <div class=\"name\">".concat(data[i].Name, "</div>\n                    <div class=\"zone\">").concat(data[i].Zone, "</div>\n                </div><img src=\"").concat(data[i].Picture1, "\" alt=\"\">\n            </div>\n            <div class=\"card-cont\">\n                <p class=\"opentime\">\n                    <i class=\"material-icons\">watch_later</i><span>").concat(data[i].Opentime, "</span></p>\n                <p class=\"add\">\n                    <i class=\"material-icons\">place</i><a href=\"https://www.google.com.tw/maps/search/").concat(data[i].Name, "\" target=\"_blank\">").concat(data[i].Add, "</a>\n                </p>\n                <p class=\"tel\"><i class=\"material-icons\">smartphone</i><a href=\"tel:").concat(data[i].Tel, "\">+").concat(data[i].Tel, "</a></p>\n                <p class=\"ticketinfo\"><i class=\"material-icons\">local_offer</i>").concat(data[i].Ticketinfo, "</p>\n            </div>\n        </li>");
+  function menuSelector(e) {
+    for (var i = 0; i < data.length; i++) {
+      ZoneList.push(data[i].Zone);
+    }
+
+    var zone = Array.from(new Set(ZoneList));
+
+    for (var _i = 0; _i < zone.length; _i++) {
+      select += "\n        <li><input type=\"radio\" id=\"list[".concat(_i + 1, "]\" value=\"").concat(zone[_i], "\" name=\"city\"><label class=\"select-option\" for=\"list[").concat(_i + 1, "]\">").concat(zone[_i], "</label></li>");
+    }
+
+    Selector.innerHTML = select;
   }
 
-  cards.innerHTML = cont;
-  var ZoneList = [];
+  menuSelector();
 
-  for (var _i = 0; _i < data.length; _i++) {
-    ZoneList.push(data[_i].Zone);
+  function updateList($data) {
+    var cont = '';
+    $data.forEach(function ($item) {
+      cont += "\n      <li class=\"card-item\">\n        <div class=\"card-img\">\n          <div class=\"card-txt\">\n            <div class=\"name\">".concat($item.Name, "</div>\n            <div class=\"zone\">").concat($item.Zone, "</div>\n          </div><img src=\"").concat($item.Picture1, "\" alt=\"\">\n        </div>\n        <div class=\"card-cont\">\n          <p class=\"opentime\">\n            <i class=\"material-icons\">watch_later</i><span>").concat($item.Opentime, "</span></p>\n          <p class=\"add\">\n            <i class=\"material-icons\">place</i><a href=\"https://www.google.com.tw/maps/search/").concat($item.Name).concat($item.Add, "\" target=\"_blank\">").concat($item.Add, "</a>\n          </p>\n          <p class=\"tel\"><i class=\"material-icons\">smartphone</i><a href=\"tel:").concat($item.Tel, "\">").concat($item.Tel, "</a></p>\n          <p class=\"ticketinfo\"><i class=\"material-icons\">local_offer</i>").concat($item.Ticketinfo, "</p>\n        </div>\n      </li>");
+    });
+    cards.innerHTML = cont;
+    cardTitle.innerHTML = $data.Name || '高雄全區';
   }
 
-  var zone = Array.from(new Set(ZoneList));
-  console.log(zone);
-  var select = '';
-  var selecter = getElemt('.select-wrap ol');
+  updateList(data);
+  var options = document.querySelectorAll('.select-wrap input[type=radio]');
+  var tags = document.querySelectorAll('.tags button');
 
-  for (var _i2 = 0; _i2 < zone.length; _i2++) {
-    select += "\n        <li><input type=\"radio\" id=\"list[".concat(_i2 + 1, "]\" name=\"city\"><label class=\"select-option\" for=\"list[").concat(_i2 + 1, "]\">").concat(zone[_i2], "</label></li>");
-  }
+  function changeFun(e) {}
 
-  selecter.innerHTML = select;
+  changeFun(); // tags.forEach(function($item){
+  //   $item.addEventListener('click', updateList)
+  // })
 }; // ----- Scroll Top ----- //
 
 
 var scrollBtn = getElemt('#scroll-top');
 
 var scroll_top = function scroll_top() {
-  // let targetPosition = scrollBtn.getBoundingClientRect().top;
-  // let starPosition = window.pageYOffset;
-  // let distance = targetPosition - starPosition;
-  // window.scrollTo(0, '-' + distance);
   window.scrollTo(0, 0);
 };
 

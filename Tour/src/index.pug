@@ -40,26 +40,17 @@ block append content
         span.list-arrow
         ul.select-wrap
           li.placeholder
-            input(type='radio', id='list[0]', name='city', checked)
-            label.select-option.select-placeholder(for='list[0]') -- 請選擇行政區 --
+            input(type='radio', id='list[0]', name='city',value="高雄全區", checked)
+            label.select-option.select-placeholder(for='list[0]') -- 高雄全區 --
           ol
-          //- li
-          //-   input(type='radio', id='list[1]', name='city')
-          //-   label.select-option(for='list[1]') 苓雅區
-          //- li
-          //-   input(type='radio', id='list[2]', name='city')
-          //-   label.select-option(for='list[2]') 三民區
-          //- li
-          //-   input(type='radio', id='list[3]', name='city')
-          //-   label.select-option(for='list[3]') 新興區
     .container
       .tags-box
         h2 熱門行政區
         .tags
-          a._purple(href="./") 苓雅區
-          a._orange(href="./") 三民區
-          a._yellow(href="./") 新興區
-          a._blue(href="./") 鹽埕區
+          button._purple(value='岡山區') 岡山區
+          button._orange(value='三民區') 三民區
+          button._yellow(value='美濃區') 美濃區
+          button._blue(value='田寮區') 田寮區
       .scroll-line
         span.material-icons play_circle_outline
       .card-wrap

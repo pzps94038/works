@@ -138,16 +138,19 @@ body {
         -ms-flex-align: center;
             align-items: center;
     margin-top: 15px; }
-    .tags-box .tags a {
+    .tags-box .tags button {
       width: 130px;
       line-height: 42px;
       text-align: center;
       color: #FFFFFF;
+      font-size: 16px;
+      border: 0;
+      cursor: pointer;
       border-radius: 5px;
       -webkit-transition: all 0.15s linear;
       -o-transition: all 0.15s linear;
       transition: all 0.15s linear; }
-      .tags-box .tags a:hover {
+      .tags-box .tags button:hover {
         opacity: .8; }
 
 ._purple {
@@ -267,11 +270,15 @@ body {
     .card-wrap .card-cont .ticketinfo {
       position: absolute;
       right: 10px;
-      bottom: 10px; }
+      bottom: 10px;
+      max-width: 182px;
+      text-align: right; }
     .card-wrap .card-cont .opentime i {
       color: #8A82CC; }
     .card-wrap .card-cont .add i {
-      color: #f5a623; }
+      color: #f5a623;
+      font-size: 24px;
+      margin: 0 3px 0 -2px; }
     .card-wrap .card-cont .tel i {
       color: #559AC8; }
     .card-wrap .card-cont .ticketinfo i {
