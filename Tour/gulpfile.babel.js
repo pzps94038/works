@@ -47,7 +47,7 @@ export function style(){
 	.pipe($.autoprefixer())
 	// .pipe($.if(options.env === 'true', $.cleanCss()))
 	.pipe($.if(options.env === 'false', $.sourcemaps.write('.')))
-	.pipe(gulp.dest(path.webroot))
+	.pipe(gulp.dest(path.webroot + 'css'))
 	.pipe(browserSync.stream())
 }
 
