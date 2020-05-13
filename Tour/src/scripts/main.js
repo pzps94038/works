@@ -1,19 +1,20 @@
 const getElemt = function (elemt) {
-  return document.querySelector(elemt);
+  return document.querySelector(elemt)
 }
-const cards = getElemt('.card-box');
-const Selector = getElemt('.select-wrap ol');
-const cardTitle = getElemt('.card-title');
-const options = getElemt('.select-wrap');
-const tags = getElemt('.tags');
+const xhr = new XMLHttpRequest()
+const cards = getElemt('.card-box')
+const Selector = getElemt('.select-wrap ol')
+const cardTitle = getElemt('.card-title')
+const options = getElemt('.select-wrap')
+const tags = getElemt('.tags')
 
-const xhr = new XMLHttpRequest();
 xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true)
 xhr.send(null);
 xhr.onload = function () {
-  const str = JSON.parse(xhr.responseText)
-  const data = str.result.records;
+  let str = JSON.parse(xhr.responseText);
+  let data = str.result.records;
 
+  // 下拉選單
   function menuSelect(e) {
     let select = '';
     let ZoneList = [];
@@ -32,7 +33,8 @@ xhr.onload = function () {
     }
     Selector.innerHTML = select;
   }
- 
+  
+  // 資料更新
   function update($data){
     let cont = `
     <li class="card-item">
@@ -55,6 +57,7 @@ xhr.onload = function () {
     cards.innerHTML += cont;
   }
   
+  // 預設顯示高雄全區資料
   function defaultList(){
     for(let i=0; i<data.length; i++){
       update(data[i]);
@@ -62,6 +65,7 @@ xhr.onload = function () {
     cardTitle.innerHTML = '高雄全區'
   }
 
+  // 切換內容
   function changeFun($target){
     if( !$target ) { return };
     cards.innerHTML = '';
@@ -74,14 +78,58 @@ xhr.onload = function () {
         cardTitle.innerHTML = '高雄全區'
       }
     }
-
-    // 計算頁數
-    let totalPages = document.querySelectorAll('.card-item').length;
-    let perPage = 6;
-    let currentPage = Math.ceil(totalPages / perPage);
-    console.log(currentPage)
   }
 
+
+
+
+
+
+
+
+  // 計算頁數
+  const pages = getElemt('.page-list');
+  function pagination ($data){
+    const dataTotal = $data.length;
+    const perPage = 6;
+    const pageTotal = Math.ceil(dataTotal / perPage);
+
+    // 回傳運算結果
+    return{dataTotal, perPage, pageTotal} 
+  }
+
+  // 用物件方式傳遞資料
+  const pageList = {
+    total: pagination(data).pageTotal
+  }
+
+  // 顯示頁碼
+  function displayPage (){
+    let pageCont = '';
+
+    for( let i=0; i<pageList.total; i++) {
+      pageCont += `<li data-page="${i + 1}">${i + 1}</li>`
+    }
+    pages.innerHTML = pageCont; // 顯示全部頁數
+    
+  }
+  displayPage()
+
+  // 頁碼按鈕
+  function switchPage(e){
+    const page = e.target.dataset.page;
+    if ( e.target.nodeName !== 'LI' ) return
+    console.log(page)
+  }
+ 
+
+
+
+
+
+
+
+  // 切換內容事件
   function events(e) {
     const option = e.target.closest('.select-wrap li input');
     const tag = e.target.closest('.tags button');
@@ -89,10 +137,12 @@ xhr.onload = function () {
     changeFun(tag)
   }
 
+  // 監聽事件
   options.addEventListener('change', events );
   tags.addEventListener('click', events );
+  pages.addEventListener('click', switchPage);
   menuSelect();
   defaultList();
-  
+
 }
 
