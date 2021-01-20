@@ -46,25 +46,27 @@ export function style(){
 	// 編譯完成css
 	.pipe($.autoprefixer())
 	// .pipe($.if(options.env === 'true', $.cleanCss()))
-	.pipe($.if(options.env === 'false', $.sourcemaps.write('.')))
-	.pipe(gulp.dest(path.webroot + 'css'))
+	// .pipe($.if(options.env === 'false', $.sourcemaps.write('.')))
+	.pipe(gulp.dest(path.webroot))
 	.pipe(browserSync.stream())
 }
 
 export function scripts(){
-	return gulp.src([path.source + '**/*.js'])
+	return gulp.src([
+		path.source + '**/*.js'
+	])
 	.pipe($.sourcemaps.init())
 	.pipe($.babel({
 		presets: ['@babel/env']
 	}))
-	.pipe($.concat('all.js'))
-	.pipe($.if(options.env === 'true', $.uglify({
-		compress: {
-			drop_console: true
-		}
-	})))
-	.pipe($.if(options.env === 'false', $.sourcemaps.write('.')))
-	.pipe(gulp.dest(path.webroot + 'scripts'))
+	// .pipe($.concat('all.js'))
+	// .pipe($.if(options.env === 'true', $.uglify({
+	// 	compress: {
+	// 		drop_console: true
+	// 	}
+	// })))
+	// .pipe($.if(options.env === 'false', $.sourcemaps.write('.')))
+	.pipe(gulp.dest(path.webroot))
 	.pipe(browserSync.stream())
 }
 
@@ -92,7 +94,7 @@ export function bower(){
 // 輸出JS插件
 export function vendorJs(){
 	return gulp.src([path.tmp + 'vendors/**/**.js'])
-	.pipe($.concat('vendor.js'))
+	// .pipe($.concat('vendor.js'))
 	.pipe($.if(options.env === 'true', $.uglify()))
 	.pipe(gulp.dest(path.webroot + 'scripts'))
 }
@@ -118,11 +120,11 @@ export function watch(){
 }
 
 exports.default = gulp.parallel(
-  pug, style, scripts, images, watch, browserTask
+  pug, style, bower, vendorJs, scripts, images, watch, browserTask
 )
 
 // gulp build --env true
 exports.build = gulp.series(
-  gulp.series(clean),
-  gulp.parallel(pug, style, scripts, imageMin)
+  gulp.series(clean, bower),
+  gulp.parallel(pug, style, vendorJs, scripts, imageMin)
 )

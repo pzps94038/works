@@ -2,47 +2,42 @@ extends ./pages/_layout.pug
 block append title
   title 高雄旅遊資訊
 block append js
-  script(src="webroot/scripts/all.js", defer)
+  script(src="webroot/scripts/axios.js", defer)
+  script(src="webroot/scripts/main.js", defer)
 block append css
   link(type="text/css", rel="stylesheet", href="webroot/css/style.css")
-  //- link(type="text/css", rel="stylesheet", href="webroot/css/select.css")
   
-mixin card
-  li.card-item
-    .card-img
-      .card-txt
-        .name 高雄願景
-        .zone 三民區
-      img(src="https://khh.travel/FileArtPic.ashx?id=979&w=1280&h=960", alt="")
-    .card-cont
-      p.opentime 
-        i.material-icons watch_later
-        | 全天候開放
-      p.add
-        i.material-icons place
-        | 高雄市三民區同盟三路與十全三路交叉處
-      p.tel
-        i.material-icons smartphone
-        a(href="tel:886-7-7995678") 886-7-7995678
-      p.ticketinfo
-        i.material-icons local_offer
-        | 免費參觀
+//- mixin card
+//-   li.card-item
+//-     .card-img
+//-       .card-txt
+//-         .name 高雄願景
+//-         .zone 三民區
+//-       img(src="https://khh.travel/FileArtPic.ashx?id=979&w=1280&h=960", alt="")
+//-     .card-cont
+//-       p.opentime 
+//-         i.material-icons watch_later
+//-         | 全天候開放
+//-       p.add
+//-         i.material-icons place
+//-         | 高雄市三民區同盟三路與十全三路交叉處
+//-       p.tel
+//-         i.material-icons smartphone
+//-         a(href="tel:886-7-7995678") 886-7-7995678
+//-       p.ticketinfo
+//-         i.material-icons local_offer
+//-         | 免費參觀
 
 block append content
   .wrapper#top
     .header
       h1 高雄旅遊資訊
       .select-box
-        input#list-open(type='radio', name='city')
-        label.list-btn(for='list-open')
-        input#list-close(type='radio', name='city')
-        label.list-btn(for='list-close')
+        input#placeholder(type='radio', name='city')
+        label.list-btn.placeholder(for='placeholder')
         span.list-arrow
         ul.select-wrap
-          li.placeholder
-            input(type='radio', id='none', name='city',value="none", checked)
-            label.select-option.select-placeholder(for='none') -- 請選擇行政區 --
-          ol
+        .overlay
     .container
       .tags-box
         h2 熱門行政區
@@ -53,26 +48,17 @@ block append content
           button._blue(value='田寮區') 田寮區
       .scroll-line
         span.material-icons play_circle_outline
-
-      ul.page-list
-      
       .card-wrap
         .card-title 高雄全區
+        .page-list
         ul.card-box
       #scroll-top
         i.material-icons expand_less
         i.material-icons expand_less
-
-   
-    //- ul.page-list
-      //- li.prev.off < prev
-      //- li 1
-      //- li.active 2
-      //- li 3
-      //- li 4
-      //- li 5
-      //- li.next next >
-
+      //- .page-list
     .footer
       h3 高雄旅遊網
-      a(href="./", target="_blank") 資料來源：高雄市政府
+      | 資料來源：
+      a(href="https://data.kcg.gov.tw/", target="_blank") 高雄市政府資料開放
+      | &nbsp;|&nbsp;
+      a(href="https://github.com/hexschool/KCGTravel", target="_blank") 六角學院

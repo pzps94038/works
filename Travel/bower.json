@@ -10,11 +10,9 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
-    "jquery": "^3.5.0"
+    "axios": "^0.21.0"
   }
 }

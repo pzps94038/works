@@ -37,7 +37,9 @@ $blue: #559AC8
     cursor: pointer
   .select-wrap
     +box-shadow(0, 1px, 10px, rgba($b, .3))
-  .select-option
+    position: relative
+    z-index: 3
+  .select-option, .placeholder
     position: relative
     display: block
     width: 100%
@@ -58,35 +60,35 @@ $blue: #559AC8
     z-index: 9
     +arrow(bottom, $b, 10px)
     +transition(all ,.2s)
-  .select-placeholder
+  .placeholder
+    display: block
     background: rgba($w, .7)
+  .overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background: rgba(black, .5)
+    display: none
+    z-index: 1
+
     
-  input[type="radio"]:not(:checked) 
+  input[type="radio"]:not(:checked)
     & + .select-option:hover
       background: #eee
-    & + .select-placeholder:hover
-      background: rgba($w, .7)
 
-  input[type="radio"]:checked + .select-option
-    display: block
-
-  #list-close + .list-btn,
-  #list-open:checked + .list-btn
-    display: none
-  
-  #list-close ~ .select-wrap ol
-    overflow: hidden
-
-  #list-open:checked 
-    & ~ .select-wrap ol
-      max-height: 460px
-      overflow-y: scroll
+  #placeholder:checked
+    & + .placeholder
+      margin-bottom: 10px
+      background: $w
     & ~ .list-arrow
       transform: translateY(-2px) scaleY(-1)
     & ~ .select-wrap
-      .placeholder
-        margin-bottom: 10px
-        +transition(all ,.2s)
+      max-height: 460px
+      overflow-y: scroll
       .select-option
         display: block
+    & ~ .overlay
+      display: block
   

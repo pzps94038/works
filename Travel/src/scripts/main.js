@@ -1,143 +1,190 @@
+const api = 'https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json'
 const getElemt = function (elemt) {
   return document.querySelector(elemt)
 }
-const xhr = new XMLHttpRequest()
+
 const cards = getElemt('.card-box')
+const option = getElemt('.select-wrap')
+const placeholder = getElemt('.placeholder')
 const cardTitle = getElemt('.card-title')
-const options = getElemt('.select-wrap ol')
-const tags = getElemt('.tags')
-const pages = getElemt('.page-list')
-let jsonData;
+const pageList = getElemt('.page-list')
+const scrollBtn = getElemt('#scroll-top')
 
-xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true)
-xhr.send(null);
-xhr.onload = function () {
-  let str = JSON.parse(xhr.responseText);
-  jsonData = str.result.records; // 主要 data
-  if( xhr.status == 200 ){
+let jsonData = []
+axios.get(api).then( res => {
+  jsonData = res.data.result.records
+  render(jsonData)
+  events(jsonData)
+}).catch( err => {
+  console.log(err)
+})
 
-    // 監聽事件
-    options.addEventListener('change', events );
-    tags.addEventListener('click', events );
-    pages.addEventListener('click', switchPage );
-    menuSelect();
-    defaultList();
-    pagination(jsonData);
-  
-  } else { console.log('error:' + xhr.status )}
-  console.log(xhr.status)
-
+// === 下拉選單 === //
+function menuSelect(data){
+  let zone = [],
+      list = []
+  data.forEach( i => {
+    zone.push(i.Zone)
+  })
+  // 過濾不重複地區
+  list = zone.filter( (e, i, arr) => {
+    return arr.indexOf(e) === i
+  })
+  return list
 }
 
-
-// 下拉選單
-function menuSelect(e) {
-  let all = ''
-  let select = '';
-  let ZoneList = [];
-
-  // 把轉出來的字串 push 到空陣列裡
-  for (let i = 0; i < jsonData.length; i++) {
-    ZoneList.push(jsonData[i].Zone);
-  }
-  // 取出不重複地區物件
-  let zone = Array.from(new Set(ZoneList));
-
-  all += `
-  <li><input type="radio" id="list[0]" value="高雄全區" name="city"><label class="select-option" for="list[0]">高雄全區</label></li>`
-
-  // 把取出來的資料帶入選單
-  for (let i = 0; i < zone.length; i++) {
-    select += `
-      <li><input type="radio" id="list[${i + 1}]" value="${zone[i]}" name="city"><label class="select-option" for="list[${i + 1}]">${zone[i]}</label></li>`
-  }
-  options.innerHTML = all + select;
-}
-
-
-
-// 資料更新
-function update($data){
-  let cont = `
-  <li class="card-item">
-    <div class="card-img">
-      <div class="card-txt">
-        <div class="name">${$data.Name}</div>
-        <div class="zone">${$data.Zone}</div>
-      </div><img src="${$data.Picture1}" alt="${$data.Name}">
-    </div>
-    <div class="card-cont">
-      <p class="opentime">
-        <i class="material-icons">watch_later</i><span>${$data.Opentime}</span></p>
-      <p class="add">
-        <i class="material-icons">place</i><a href="https://www.google.com.tw/maps/search/${$data.Name}${$data.Add}" target="_blank">${$data.Add}</a>
-      </p>
-      <p class="tel"><i class="material-icons">smartphone</i><a href="tel:${$data.Tel}">${$data.Tel}</a></p>
-      <p class="ticketinfo"><i class="material-icons">local_offer</i>${$data.Ticketinfo}</p>
-    </div>
-  </li>`
-  cards.innerHTML += cont;
-}
-
-// 預設顯示高雄全區資料
-function defaultList(){
-  for(let i=0; i<jsonData.length; i++){
-    update(jsonData[i]);
-  }
-  cardTitle.innerHTML = '高雄全區'
-}
-
-// 切換內容
-function changeFun($target){
-  if( !$target ) { return };
-  cards.innerHTML = '';
-  for(let i=0; i<jsonData.length; i++){
-    if($target.value === jsonData[i].Zone) {
-      update(jsonData[i]);
-      cardTitle.innerHTML = jsonData[i].Zone;
-    } else if ( $target.value === '高雄全區' ) {
-      update(jsonData[i]);
-      cardTitle.innerHTML = '高雄全區'
+// === 資料更新 === //
+function update(data) {
+  cards.innerHTML = ''
+  for( let i=0; i<data.length; i++ ){
+    let cont = `
+    <li class="card-item">
+      <div class="card-img">
+        <div class="card-txt">
+          <div class="name">${data[i].Name}</div>
+          <div class="zone">${data[i].Zone}</div>
+        </div><img src="${data[i].Picture1}" alt="${data[i].Name}">
+      </div>
+      <div class="card-cont">
+        <p class="opentime">
+          <i class="material-icons">watch_later</i><span>${data[i].Opentime}</span></p>
+        <p class="add">
+          <i class="material-icons">place</i><a href="https://www.google.com.tw/maps/search/${data[i].Name}${data[i].Add}" target="_blank">${data[i].Add}</a>
+        </p>
+        <p class="tel"><i class="material-icons">smartphone</i><a href="tel:${data[i].Tel}">${data[i].Tel}</a></p>
+        <p class="ticketinfo"><i class="material-icons">local_offer</i>${data[i].Ticketinfo}</p>
+      </div>
+    </li>`
+    cards.innerHTML += cont
+    
+    const tickets = document.querySelectorAll('.ticketinfo')
+    if( data[i].Ticketinfo == '' ){
+      tickets[i].style.display = 'none'
     }
   }
 }
 
-// 切換內容事件
-function events(e) {
-  const option = e.target.closest('.select-wrap li input');
-  const tag = e.target.closest('.tags button');
-  changeFun(option)
-  changeFun(tag)
+// === 切換地區 === //
+function switchData(target, data) {
+  let cont
+  target.forEach( item => {
+    item.addEventListener('click', () => {
+      placeholder.textContent = item.value
+      cardTitle.textContent = item.value
+      cont = []
+      data.filter( d => {
+        if( d.Zone == item.value ){
+          cont.push(d)
+        } else if (item.value == '高雄全區'){
+          cont = data
+        }
+      })
+      // update(cont)
+      jsonData = cont // 切換分頁時，替換最外層資料
+      pagination(cont, 1)
+    })
+  })
 }
 
-
-// 計算並顯示頁碼
-function pagination($data){
-  let pageCont = '';
-  const dataTotal = jsonData.length;
-  const perPage = 6;
-  const pageTotal = Math.ceil(dataTotal / perPage);
-
-  // 如果內容>6，則頁碼索引+1
-  $data.forEach(function(num, index){
-    // num = 內容數量 index = 頁碼索引
-    if ( num > 6 ) {
-      index + 1
+// === 顯示分頁 === //
+function pagination(data, current) {
+  const perPage = 6
+  const pages = {
+    nowPage: current,
+    totlePage: Math.ceil(data.length / perPage),
+    minData: (current - 1) * perPage + 1,
+    maxData: current * perPage
+  }
+  let newData = []
+  data.forEach( (item, index) => {
+    let num = index + 1
+    if( num >= pages.minData && num <= pages.maxData ){
+      newData.push(item)
     }
   })
+  update(newData)
+  pageBtn(pages, current)
+}
 
-  for( let i=0; i<pageTotal; i++) {
-    pageCont += `<li data-page="${i + 1}">${i + 1}</li>`
+// === 頁碼按鈕 === //
+function pageBtn(pages, current){
+  const total = pages.totlePage
+  const now = pages.nowPage
+  let str = ''
+
+  // 上一頁
+  if( current > 1 ){
+    str += `<a class="prev" data-page="${Number(now) - 1}">prev</a>`
+  } else {
+    str += `<a class="prev off" data-page="${Number(now)}">prev</a>`
   }
-  pages.innerHTML = pageCont; // 顯示全部頁數
+
+  // 當前頁
+  for( let i=1; i<=total; i++ ){
+    if( Number(now) === i ){
+      str += `<a class="active" data-page="${i}">${i}</a>`
+    } else {
+      str += `<a data-page="${i}">${i}</a>`
+    }
+  }
+
+  // 下一頁
+  if( current < total ){
+    str += `<a class="next" data-page="${Number(now) + 1}">next</a>`
+  } else {
+    str += `<a class="next off" data-page="${Number(now)}">next</a>`
+  }
+  pageList.innerHTML = str
 }
 
+// === 切換分頁 === //
 function switchPage(e){
-  const pageBtn = e.target.dataset.page;
-  if( e.target.nodeName !== 'LI' ) { return }
-  console.log(pageBtn)
+  if( e.target.nodeName !== 'A' ) { return }
+  let page = e.target.dataset.page
+  pagination(jsonData, page)
 }
 
+// === 畫面滑動 === //
+function scrollTop (){
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+function scrollStyle (){
+  if( window.scrollY > 100 ){
+    scrollBtn.classList.add('is-active')
+  } else {
+    scrollBtn.classList.remove('is-active')
+  }
+}
 
+// === 畫面渲染 === //
+function render(data){
+  // 選單內容
+  let zone = ''
+  let all = `
+    <li><input type="radio" id="list[0]" value="高雄全區" name="city"><label class="select-option" for="list[0]">高雄全區</label></li>`
 
+  for( let i=0; i<menuSelect(data).length; i++ ){
+    zone += `
+    <li><input type="radio" id="list[${i + 1}]" value="${menuSelect(data)[i]}" name="city"><label class="select-option" for="list[${i + 1}]">${menuSelect(data)[i]}</label></li>`
+  }
+  option.innerHTML = all + zone
+  placeholder.innerHTML = '-- 請選擇行政區 --'
 
+  // 預設資料內容
+  // update(data)
+  pagination(data, 1)
+}
+
+// === 啟動事件 === //
+function events(data){
+  const options = document.querySelectorAll('.select-wrap li input')
+  const tags = document.querySelectorAll('.tags button')
+  switchData(options, data)
+  switchData(tags, data)
+  pageList.addEventListener('click', switchPage)
+  scrollBtn.addEventListener('click', scrollTop)
+  window.addEventListener('scroll', scrollStyle)
+}
