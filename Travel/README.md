@@ -29,7 +29,9 @@ axios.get(api).then( res => {
   console.log(err)
 })
 ```
-<br>
+
+<br><br>
+
 ### 下拉選單對應取出不重複地區
 1. 宣告兩個空陣列，先取出資料裡的所有地區
 2. 再用 `filter()` 和 `indexOf()` 過濾出不重複地區
@@ -48,7 +50,9 @@ list = zone.filter( (e, i, arr) => {
     return list
 }
 ```
-<br>
+
+<br><br>
+
 ### 依照選擇地區切換資料
 首先準備更新的內容，每次資料更新就重新執行一次
 ```javascript=
@@ -102,7 +106,9 @@ function events(data){
   switchData(tags, data)
 }
 ```
-<br>
+
+<br><br>
+
 ### 分頁邏輯
 之前寫過一篇關於分頁拆解的筆記，可參考：[媽呀！又是分頁！](https://hackmd.io/pLyb5TWGT7Wittt63fuyUg)
 ```javascript=
@@ -124,7 +130,9 @@ function pagination(data, current) {
   update(newData)
 }
 ```
-<br>
+
+<br><br>
+
 ### 依照分頁切換資料
 ```javascript=
 function switchPage(e){
@@ -148,6 +156,8 @@ function switchData(target, data) {
   })
 }
 ```
+
 ---
+
 ### 參考資料
 [scroll-behavior 滑順的捲動效果](https://andyyou.github.io/2016/06/01/smooth-page-scroll//)
