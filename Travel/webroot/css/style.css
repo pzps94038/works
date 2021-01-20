@@ -361,7 +361,7 @@ body {
   right: 50%;
   margin-right: -512px;
   z-index: 2;
-  cursor: pointer;
+  cursor: default;
   opacity: 0;
   -webkit-transition: all 0.15s linear;
   -o-transition: all 0.15s linear;
@@ -382,4 +382,5 @@ body {
     #scroll-top i + i {
       margin-top: 4px; }
   #scroll-top.is-active {
-    opacity: 1; }
+    opacity: 1;
+    cursor: pointer; }
