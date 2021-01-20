@@ -143,7 +143,7 @@ function switchPage(e){
 ```
 在首頁切換分頁沒問題後，發現在各地區切換分頁會發生錯誤
 <br>
-這時候要在切換地區的函示做些調整
+這時候要在切換地區的函式做些調整
 ```javascript=
 function switchData(target, data) {
   let cont
